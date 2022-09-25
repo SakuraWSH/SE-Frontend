@@ -3,10 +3,6 @@ import { fileURLToPath, URL } from 'node:url'
 import { defineConfig} from 'vite'
 import vue from '@vitejs/plugin-vue'
 
-// const config: UserConfig={
-//   plugins:[vue()]
-// }
-
 // export default config
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -15,16 +11,19 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
-  }
+  },
+  transplieDependencies:true,
+  server: {
+    host: '127.0.0.1',//本机ip
+    port: 5173,
+    //open: false, //自动打开 
+    //base: "./ ", //生产环境路径
+    proxy: {
+      '/api': {
+        target: 'http://59.110.140.64/test/',	//实际请求地址
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+      },
+    }
+  },
 })
-// module.exports = defineConfig({
-//   transplieDependencies:true,
-//   devServer:{
-//     proxy:{
-//       "/api":{
-//         target:"http://59.110.140.64/test/",
-//         changeOrigin:true
-//       }
-//     }
-//   }
-// })

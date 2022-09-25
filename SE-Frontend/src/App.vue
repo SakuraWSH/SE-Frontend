@@ -1,18 +1,7 @@
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
-
-  <RouterView />
+  <h1>
+    {{ helloworld }}
+  </h1>
 </template>
 
 <script>
@@ -24,12 +13,18 @@ export default{
   mounted(){
     axios({
       method:"get",
-      url:"http://59.110.140.64/test/"
+      // url:"http://59.110.140.64/test/"
+      url:"/api/"
       }).then(res =>{
       console.log(res.data);
-  })
-  }
-  
+      this.helloworld = res.data;
+    })
+  },
+  data(){
+    return{
+      helloworld:"Ajax测试"
+    }
+  },
 }
 </script>
 
