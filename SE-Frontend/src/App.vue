@@ -5,18 +5,14 @@
 </template>
 
 <script>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
 import axios from 'axios'
 export default{
   name:'helloworld',
   mounted(){
     axios({
       method:"get",
-      // url:"http://59.110.140.64/test/"
-      url:"/api/"
-      }).then(res =>{
-      console.log(res.data);
+      url:"/api/test/"
+    }).then(res =>{
       this.helloworld = res.data;
     })
   },

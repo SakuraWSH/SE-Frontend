@@ -20,7 +20,7 @@ export default defineConfig({
     //base: "./ ", //生产环境路径
     proxy: {
       '/api': {
-        target: 'http://59.110.140.64/test/',	//实际请求地址
+        target: 'http://59.110.140.64',	//实际请求地址
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
       },
