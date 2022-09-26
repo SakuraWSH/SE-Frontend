@@ -16,7 +16,7 @@ export default defineConfig({
   server: {
     host: '127.0.0.1',//本机ip
     port: 5173,
-    //open: false, //自动打开 
+    open: true, //自动打开 
     //base: "./ ", //生产环境路径
     proxy: {
       '/api': {
