@@ -10,5 +10,18 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
-  }
+  },
+  server: {
+    host: '127.0.0.1',//本机ip
+    port: 5173,
+    open: true, //自动打开 
+    //base: "./ ", //生产环境路径
+    proxy: {
+      '/api': {
+        target: 'http://59.110.140.64',	//实际请求地址
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+      },
+    }
+  },
 })
