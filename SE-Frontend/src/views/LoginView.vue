@@ -1,5 +1,5 @@
 <template>
   <main>
-    Log in
+    登录页面
   </main>
 </template>

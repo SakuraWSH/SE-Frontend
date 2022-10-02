@@ -1,24 +1,29 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+<template>
+  <h1>
+    {{ helloworld }}
+  </h1>
+</template>
+
+<script>
+import axios from 'axios'
+export default {
+  name: 'helloworld',
+  mounted() {
+    axios({
+      method: "get",
+      url: "/api/test/"
+    }).then(res => {
+      this.helloworld = res.data;
+    })
+  },
+  data() {
+    return {
+      helloworld: "Ajax测试"
+    }
+  },
+}
 </script>
 
-<template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
-
-  <RouterView />
-</template>
 
 <style scoped>
 header {
