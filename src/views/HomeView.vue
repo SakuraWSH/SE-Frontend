@@ -40,6 +40,10 @@
               <el-icon v-if="mouseOn != 3">
                 <ShoppingCartFull />
               </el-icon>
+              <div v-if="mouseOn == 3" class="icon-text">
+                日 常<br />
+                用 品
+              </div>
             </div>
           </el-col>
         </el-row>
@@ -57,6 +61,10 @@
               <el-icon v-if="mouseOn != 4">
                 <Flag />
               </el-icon>
+              <div v-if="mouseOn == 4" class="icon-text">
+                课 程<br />
+                组 队
+              </div>
             </div>
           </el-col>
           <el-col span="6" class="home-col">
@@ -64,6 +72,10 @@
               <el-icon v-if="mouseOn != 5">
                 <Ship />
               </el-icon>
+              <div v-if="mouseOn == 5" class="icon-text">
+                活 动<br />
+                约 人
+              </div>
             </div>
           </el-col>
           <el-col span="6" class="home-col">
@@ -71,6 +83,10 @@
               <el-icon v-if="mouseOn != 6">
                 <Connection />
               </el-icon>
+              <div v-if="mouseOn == 6" class="icon-text">
+                寻 找<br />
+                伴 侣
+              </div>
             </div>
           </el-col>
           <el-col span="6" class="home-col">
@@ -78,6 +94,10 @@
               <el-icon v-if="mouseOn != 7">
                 <SuitcaseLine />
               </el-icon>
+              <div v-if="mouseOn == 7" class="icon-text">
+                招 聘<br />
+                信 息
+              </div>
             </div>
           </el-col>
         </el-row>
@@ -95,6 +115,10 @@
               <el-icon v-if="mouseOn != 8">
                 <Checked />
               </el-icon>
+              <div v-if="mouseOn == 8" class="icon-text">
+                课 程<br />
+                攻 略
+              </div>
             </div>
           </el-col>
           <el-col span="6" class="home-col">
@@ -102,6 +126,10 @@
               <el-icon v-if="mouseOn != 9">
                 <Guide />
               </el-icon>
+              <div v-if="mouseOn == 9" class="icon-text">
+                生 涯<br />
+                指 北
+              </div>
             </div>
           </el-col>
           <el-col span="6" class="home-col">
@@ -109,6 +137,10 @@
               <el-icon v-if="mouseOn != 10">
                 <School />
               </el-icon>
+              <div v-if="mouseOn == 10" class="icon-text">
+                燕 园<br />
+                生 活
+              </div>
             </div>
           </el-col>
           <el-col span="6" class="home-col">
@@ -116,6 +148,10 @@
               <el-icon v-if="mouseOn != 11">
                 <Service />
               </el-icon>
+              <div v-if="mouseOn == 11" class="icon-text">
+                吐 槽<br />
+                专 区
+              </div>
             </div>
           </el-col>
         </el-row>
@@ -222,6 +258,10 @@ export default defineComponent({
   justify-content: center;
   align-items: center;
   /* border: 1px solid; */
+}
+
+.home-square:hover {
+  cursor: pointer;
 }
 
 .icon-text {
