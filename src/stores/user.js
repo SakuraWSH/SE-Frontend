@@ -5,5 +5,6 @@ export default createStore({
         email: 'email@pku.edu.cn',
         username: 'Sam Wong',
         token: '0',
+        profile: '/src/assets/images/default_profile.png'
     }
 })

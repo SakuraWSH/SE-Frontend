@@ -79,7 +79,8 @@
             <el-dropdown>
                 <span class="el-dropdown-link">
                     <div>{{$store.state.username}}</div>
-                    <img alt="profile" src="../assets/images/default_profile.png" @click="goto('/user')" />
+                    <!-- <img alt="profile" src="../assets/images/default_profile.png" @click="goto('/user')" /> -->
+                    <img alt="profile" :src="profileURI" @click="goto('/user')" />
                     <el-icon class="el-icon--right">
                         <arrow-down />
                     </el-icon>
@@ -110,6 +111,11 @@ export default defineComponent({
         ElDropdownItem,
         ElIcon,
         ElInput,
+    },
+    data() {
+        return {
+            profileURI: this.$store.state.profile,
+        }
     },
     methods: {
         goto(router) {
