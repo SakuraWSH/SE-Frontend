@@ -14,22 +14,30 @@
         </div>
         <el-row class="home-row" justify="center">
           <el-col span="8" class="home-col">
-            <div class="home-square">
-              <el-icon>
+            <div class="home-square" @click="goto('/list')" @mouseenter="mouseOn = 1" @mouseleave="mouseOn = 0">
+              <el-icon v-if="mouseOn != 1">
                 <DocumentChecked />
               </el-icon>
+              <div v-if="mouseOn == 1" class="icon-text">
+                课 程<br />
+                资 料
+              </div>
             </div>
           </el-col>
           <el-col span="8" class="home-col">
-            <div class="home-square">
-              <el-icon>
+            <div class="home-square" @click="goto('/list')" @mouseenter="mouseOn = 2" @mouseleave="mouseOn = 0">
+              <el-icon v-if="mouseOn != 2">
                 <Collection />
               </el-icon>
+              <div v-if="mouseOn == 2" class="icon-text">
+                书 籍<br />
+                专 区
+              </div>
             </div>
           </el-col>
           <el-col span="8" class="home-col">
-            <div class="home-square">
-              <el-icon>
+            <div class="home-square" @click="goto('/list')" @mouseenter="mouseOn = 3" @mouseleave="mouseOn = 0">
+              <el-icon v-if="mouseOn != 3">
                 <ShoppingCartFull />
               </el-icon>
             </div>
@@ -45,29 +53,29 @@
         </div>
         <el-row class="home-row" justify="center">
           <el-col span="6" class="home-col">
-            <div class="home-square">
-              <el-icon>
+            <div class="home-square" @click="goto('/list')" @mouseenter="mouseOn = 4" @mouseleave="mouseOn = 0">
+              <el-icon v-if="mouseOn != 4">
                 <Flag />
               </el-icon>
             </div>
           </el-col>
           <el-col span="6" class="home-col">
-            <div class="home-square">
-              <el-icon>
+            <div class="home-square" @click="goto('/list')" @mouseenter="mouseOn = 5" @mouseleave="mouseOn = 0">
+              <el-icon v-if="mouseOn != 5">
                 <Ship />
               </el-icon>
             </div>
           </el-col>
           <el-col span="6" class="home-col">
-            <div class="home-square">
-              <el-icon>
+            <div class="home-square" @click="goto('/list')" @mouseenter="mouseOn = 6" @mouseleave="mouseOn = 0">
+              <el-icon v-if="mouseOn != 6">
                 <Connection />
               </el-icon>
             </div>
           </el-col>
           <el-col span="6" class="home-col">
-            <div class="home-square">
-              <el-icon>
+            <div class="home-square" @click="goto('/list')" @mouseenter="mouseOn = 7" @mouseleave="mouseOn = 0">
+              <el-icon v-if="mouseOn != 7">
                 <SuitcaseLine />
               </el-icon>
             </div>
@@ -83,29 +91,29 @@
         </div>
         <el-row class="home-row bottom-row" justify="center">
           <el-col span="6" class="home-col">
-            <div class="home-square">
-              <el-icon>
+            <div class="home-square" @click="goto('/list')" @mouseenter="mouseOn = 8" @mouseleave="mouseOn = 0">
+              <el-icon v-if="mouseOn != 8">
                 <Checked />
               </el-icon>
             </div>
           </el-col>
           <el-col span="6" class="home-col">
-            <div class="home-square">
-              <el-icon>
+            <div class="home-square" @click="goto('/list')" @mouseenter="mouseOn = 9" @mouseleave="mouseOn = 0">
+              <el-icon v-if="mouseOn != 9">
                 <Guide />
               </el-icon>
             </div>
           </el-col>
           <el-col span="6" class="home-col">
-            <div class="home-square">
-              <el-icon>
+            <div class="home-square" @click="goto('/list')" @mouseenter="mouseOn = 10" @mouseleave="mouseOn = 0">
+              <el-icon v-if="mouseOn != 10">
                 <School />
               </el-icon>
             </div>
           </el-col>
           <el-col span="6" class="home-col">
-            <div class="home-square">
-              <el-icon>
+            <div class="home-square" @click="goto('/list')" @mouseenter="mouseOn = 11" @mouseleave="mouseOn = 0">
+              <el-icon v-if="mouseOn != 11">
                 <Service />
               </el-icon>
             </div>
@@ -135,6 +143,16 @@ export default defineComponent({
     ElMain,
     ElIcon,
   },
+  data() {
+    return {
+      mouseOn: 0,
+    }
+  },
+  methods: {
+    goto(router) {
+      this.$router.replace(router);
+    }
+  }
 })
 </script>
 
@@ -142,9 +160,6 @@ export default defineComponent({
 .el-container {
   height: 100%;
   width: 100%;
-  /* display: flex; */
-  /* justify-content: center; */
-  /* align-items: center; */
 }
 
 .el-header {
@@ -194,15 +209,23 @@ export default defineComponent({
   height: 100%;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .home-square {
   font-size: 7vw;
   margin-left: 3vw;
   margin-right: 3vw;
+  height: 8vw;
+  width: 8vw;
   display: flex;
   justify-content: center;
   align-items: center;
+  /* border: 1px solid; */
+}
+
+.icon-text {
+  font-size: 2.5vw;
 }
 
 .bottom-row {
