@@ -78,7 +78,7 @@
         <div class="profile">
             <el-dropdown>
                 <span class="el-dropdown-link">
-                    <div>username</div>
+                    <div>{{$store.state.username}}</div>
                     <img alt="profile" src="../assets/images/default_profile.png" @click="goto('/user')" />
                     <el-icon class="el-icon--right">
                         <arrow-down />
