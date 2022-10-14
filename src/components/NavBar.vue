@@ -68,7 +68,7 @@
                 </el-dropdown>
             </el-col>
         </el-row>
-        <el-input size="large" class="w-50 m-2" placeholder="全站搜索">
+        <el-input v-model="keyword.keyword" size="large" class="w-50 m-2" placeholder="全站搜索" @keyup.enter="search()">
             <template #prefix>
                 <el-icon class="el-input__icon">
                     <search />
@@ -78,8 +78,8 @@
         <div class="profile">
             <el-dropdown>
                 <span class="el-dropdown-link">
-                    <div>username</div>
-                    <img alt="profile" src="../assets/images/default_profile.png" @click="goto('/user')" />
+                    <div>{{$store.state.username}}</div>
+                    <img alt="profile" :src="$store.state.profile" @click="goto('/user')" />
                     <el-icon class="el-icon--right">
                         <arrow-down />
                     </el-icon>
@@ -114,8 +114,18 @@ export default defineComponent({
     methods: {
         goto(router) {
             this.$router.replace(router);
+        },
+        search() {
+            console.log(this.keyword.keyword);
+            this.$router.replace('/list');
         }
     }
+})
+</script>
+
+<script setup>
+const keyword = reactive({
+    keyword: '',
 })
 </script>
 
@@ -155,8 +165,8 @@ export default defineComponent({
 }
 
 .profile .el-dropdown span img {
-    height: 60%;
-    width: auto;
+    height: 36px;
+    width: 36px;
     border-radius: 50%;
 }
 
