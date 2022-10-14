@@ -139,22 +139,18 @@ const keyword = reactive({
     flex-direction: row;
     align-items: center;
 }
-
 .nav-bar-logo {
     height: 50%;
     margin: 1rem;
     margin-right: 2rem;
 }
-
 .el-row {
     margin-top: 0.5rem;
 }
-
 .el-input {
     width: 40%;
     margin-left: 3rem;
 }
-
 .profile {
     height: 100%;
     flex-grow: 1;
@@ -163,22 +159,18 @@ const keyword = reactive({
     align-items: center;
     margin-right: 1rem;
 }
-
 .profile .el-dropdown span img {
     height: 36px;
     width: 36px;
     border-radius: 50%;
 }
-
 .profile .el-dropdown span div {
     margin: 1rem;
     font-size: larger;
 }
-
 .profile .el-dropdown {
     height: 100%;
 }
-
 .profile .el-dropdown span {
     height: 100%;
     display: flex;

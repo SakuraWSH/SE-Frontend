@@ -7,14 +7,15 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+package-lock.json
+package.json
+vite.config.js
 node_modules
 .DS_Store
 dist
 dist-ssr
 coverage
 *.local
-package-lock.json
-package.json
 
 /cypress/videos/
 /cypress/screenshots/
