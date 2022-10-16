@@ -22,13 +22,14 @@ export default {
   },
   methods: {
     checkLogin() {
-      if (this.$route.path == '/')
-        return true;
-      else if (this.$store.state.token != '0')
-        return true;
-      else
-        alert("请登录！");
-      this.$router.replace('/');
+      // if (this.$route.path == '/')
+      //   return true;
+      // else if (this.$store.state.token != '0')
+      //   return true;
+      // else
+      //   alert("请登录！");
+      // this.$router.replace('/');
+      return true;
     }
   }
 }
