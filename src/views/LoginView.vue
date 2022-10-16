@@ -51,6 +51,7 @@
 <script>
 import { ElForm, ElFormItem, ElInput, ElButton, ElImage, ElCard } from 'element-plus';
 import { defineComponent, reactive, ref } from 'vue';
+import { mapMutations } from 'vuex';
 import '../../node_modules/element-plus/theme-chalk/index.css'
 import user from '../stores/user';
 export default defineComponent({
@@ -74,17 +75,18 @@ export default defineComponent({
     }
   },
   methods: {
+    ...mapMutations(["setEmail", "setUsername", "setToken", "setProfile"]),
     logIn() {
-      console.log(this.loginForm.email);
-      console.log(this.loginForm.password);
+
       user.email = this.loginForm.email;
       user.username = 'Test';
       user.token = '花拳绣腿';
-      user.profile = '/src/assets/images/logo.png'
-      this.$store.state.email = user.email;
-      this.$store.state.username = user.username;
-      this.$store.state.token = user.token;
-      this.$store.state.profile = user.profile;
+      user.profile = '/src/assets/images/default_profile.png'
+
+      this.setEmail(user.email);
+      this.setUsername(user.username);
+      this.setToken(user.token);
+      this.setProfile(user.profile);
       this.$router.replace('/home');
     },
     signUp() {

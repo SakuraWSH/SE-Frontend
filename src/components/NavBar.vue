@@ -89,6 +89,7 @@
                         <el-dropdown-item @click="goto('/user')">个人信息</el-dropdown-item>
                         <el-dropdown-item @click="goto('/user')">发布历史</el-dropdown-item>
                         <el-dropdown-item @click="goto('/user')">聊天列表</el-dropdown-item>
+                        <el-dropdown-item @click="logout()">退出登录</el-dropdown-item>
                     </el-dropdown-menu>
                 </template>
             </el-dropdown>
@@ -100,6 +101,8 @@
 <script>
 import { ElRow, ElCol, ElDropdown, ElDropdownMenu, ElDropdownItem, ElIcon, ElInput } from 'element-plus';
 import { defineComponent, reactive } from 'vue';
+import { mapMutations } from 'vuex';
+import user from '../stores/user';
 import '../../node_modules/element-plus/theme-chalk/index.css'
 export default defineComponent({
     components: {
@@ -112,12 +115,20 @@ export default defineComponent({
         ElInput,
     },
     methods: {
+        ...mapMutations(["setEmail", "setUsername", "setToken", "setProfile"]),
         goto(router) {
             this.$router.replace(router);
         },
         search() {
             console.log(this.keyword.keyword);
             this.$router.replace('/list');
+        },
+        logout() {
+            this.setEmail('email@pku.edu.cn');
+            this.setUsername('Sam Wong');
+            this.setToken('0');
+            this.setProfile('/src/assets/images/default_profile.png');
+            this.$router.replace('/');
         }
     }
 })
