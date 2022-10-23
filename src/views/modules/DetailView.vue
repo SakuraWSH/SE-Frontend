@@ -103,23 +103,23 @@ export default defineComponent({
   width: 100%;
 }
 .page {
-    background: palegreen;
-    padding-top: 0;
-    padding: 0;
-    height: 10%;
-    width: 100%;
+  background: palegreen;
+  padding-top: 0;
+  padding: 0;
+  height: 10%;
+  width: 100%;
 }
 ul li {
-    list-style: none;
-    float: left;
-    width: 20%;
-    height: 50%;
-    line-height: 40px;
-    text-align: center;
-    cursor: pointer;
-    color: palegoldenrod;
-    font-size: 14px;
-    background-color: aquamarine;
+  list-style: none;
+  float: left;
+  width: 20%;
+  height: 50%;
+  line-height: 40px;
+  text-align: center;
+  cursor: pointer;
+  color: palegoldenrod;
+  font-size: 14px;
+  background-color: aquamarine;
 }
 .current {
     color: orangered;
