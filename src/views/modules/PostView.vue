@@ -48,6 +48,8 @@
     <el-button>
       发布
     </el-button>
+  value1:{{ value1 }}
+  value2:{{ value2 }}
   </el-container>
 </template>
 
