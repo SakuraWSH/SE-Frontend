@@ -71,6 +71,7 @@
       </div>
     </div>
     <div class="picture-add">
+      <Upload />
     </div>
     <el-input v-model="input2" placeholder="详情" />
     <el-button>
@@ -87,6 +88,7 @@
 
 <script setup>
 import NavBar from "../../components/NavBar.vue"
+import Upload from "../../components/Upload.vue"
 import { ref } from 'vue'
 const input1 = ref('')
 const input2 = ref('')
