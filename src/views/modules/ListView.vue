@@ -43,7 +43,7 @@
         <el-col :span="4">
           <el-card shadow="hover" @click="goto('/detail')">
             <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-              class="image7" />
+              class="image" />
           </el-card>
         </el-col>
         <el-col :span="4">
@@ -130,28 +130,33 @@ export default defineComponent({
 }
 
 .sonthree {
-  height: 70%;
+  /* height: 70%; */
   top: 25%;
   width: 100%;
 }
 
 .grandsonone {
-  height: 33%;
+  /* height: 33%; */
   width: 100%;
 }
 
 .grandsontwo {
-  height: 33%;
+  /* height: 33%; */
   width: 100%;
 }
 
 .grandsonthree {
-  height: 33%;
+  /* height: 33%; */
   width: 100%;
 }
 
+.el-card {
+  height: 15vw;
+  width: 15vw;
+}
+
 .image {
-  height: 100%;
-  width: 100%;
+  height: 12vw;
+  width: 12vw;
 }
 </style>
