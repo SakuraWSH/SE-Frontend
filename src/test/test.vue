@@ -1,5 +1,4 @@
 <template>
-    <h1>Test</h1>
     <div class="imgUpload">
         <ul v-for="(imgStr, index) in imgList">
             <el-card><img :src="imgStr" alt="Error"></el-card>
