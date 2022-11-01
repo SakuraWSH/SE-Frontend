@@ -1,111 +1,122 @@
 <template>
-  <div class="father">
-    筛选条件
-    <el-cascader v-model="tempvalue" :options="options1" :show-all-levels = 'true'/>
-    <el-row class="sonthree">
-      <el-row class="grandsonone" justify="center">
-        <el-col :span="4">
-          <el-card shadow="hover" @click="goto('/detail')">
-            <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-              class="image" />
-          </el-card>
-        </el-col>
-        <el-col :span="4">
-          <el-card shadow="hover" @click="goto('/detail')">
-            <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-              class="image" />
-          </el-card>
-        </el-col>
-        <el-col :span="4">
-          <el-card shadow="hover" @click="goto('/detail')">
-            <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-              class="image" />
-          </el-card>
-        </el-col>
-        <el-col :span="4">
-          <el-card shadow="hover" @click="goto('/detail')">
-            <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-              class="image" />
-          </el-card>
-        </el-col>
-        <el-col :span="4">
-          <el-card shadow="hover" @click="goto('/detail')">
-            <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-              class="image" />
-          </el-card>
-        </el-col>
+  <el-container>
+    <el-header>
+      <NavBar />
+    </el-header>
+    <el-cascader v-model="tempvalue" :options="options1" :show-all-levels='true' />
+    <el-pagination  background layout="prev, pager, next" :total="1000" />
+    <div class="father"> 
+      <el-row class="sonthree">
+        <el-row class="grandsonone" justify="center">
+          <el-col :span="4">
+            <el-card shadow="hover" @click="goto('/detail')">
+              <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                class="image" />
+            </el-card>
+          </el-col>
+          <el-col :span="4">
+            <el-card shadow="hover" @click="goto('/detail')">
+              <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                class="image" />
+            </el-card>
+          </el-col>
+          <el-col :span="4">
+            <el-card shadow="hover" @click="goto('/detail')">
+              <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                class="image" />
+            </el-card>
+          </el-col>
+          <el-col :span="4">
+            <el-card shadow="hover" @click="goto('/detail')">
+              <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                class="image" />
+            </el-card>
+          </el-col>
+          <el-col :span="4">
+            <el-card shadow="hover" @click="goto('/detail')">
+              <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                class="image" />
+            </el-card>
+          </el-col>
+        </el-row>
+        <el-row class="grandsontwo" justify="center">
+          <el-col :span="4">
+            <el-card shadow="hover" @click="goto('/detail')">
+              <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                class="image" />
+            </el-card>
+          </el-col>
+          <el-col :span="4">
+            <el-card shadow="hover" @click="goto('/detail')">
+              <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                class="image" />
+            </el-card>
+          </el-col>
+          <el-col :span="4">
+            <el-card shadow="hover" @click="goto('/detail')">
+              <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                class="image" />
+            </el-card>
+          </el-col>
+          <el-col :span="4">
+            <el-card shadow="hover" @click="goto('/detail')">
+              <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                class="image" />
+            </el-card>
+          </el-col>
+          <el-col :span="4">
+            <el-card shadow="hover" @click="goto('/detail')">
+              <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                class="image" />
+            </el-card>
+          </el-col>
+        </el-row>
+        <el-row class="grandsonthree" justify="center">
+          <el-col :span="4">
+            <el-card shadow="hover" @click="goto('/detail')">
+              <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                class="image" />
+            </el-card>
+          </el-col>
+          <el-col :span="4">
+            <el-card shadow="hover" @click="goto('https://pkuhelper.pku.edu.cn/hole/')">
+              <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                class="image" />
+            </el-card>
+          </el-col>
+          <el-col :span="4">
+            <el-card shadow="hover" @click="goto('/detail')">
+              <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                class="image" />
+            </el-card>
+          </el-col>
+          <el-col :span="4">
+            <el-card shadow="hover" @click="goto('/detail')">
+              <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                class="image" />
+            </el-card>
+          </el-col>
+          <el-col :span="4">
+            <el-card shadow="hover" @click="jump">
+              <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                class="image" />
+            </el-card>
+          </el-col>
+        </el-row>
       </el-row>
-      <el-row class="grandsontwo" justify="center">
-        <el-col :span="4">
-          <el-card shadow="hover" @click="goto('/detail')">
-            <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-              class="image" />
-          </el-card>
-        </el-col>
-        <el-col :span="4">
-          <el-card shadow="hover" @click="goto('/detail')">
-            <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-              class="image" />
-          </el-card>
-        </el-col>
-        <el-col :span="4">
-          <el-card shadow="hover" @click="goto('/detail')">
-            <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-              class="image" />
-          </el-card>
-        </el-col>
-        <el-col :span="4">
-          <el-card shadow="hover" @click="goto('/detail')">
-            <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-              class="image" />
-          </el-card>
-        </el-col>
-        <el-col :span="4">
-          <el-card shadow="hover" @click="goto('/detail')">
-            <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-              class="image" />
-          </el-card>
-        </el-col>
-      </el-row>
-      <el-row class="grandsonthree" justify="center">
-        <el-col :span="4">
-          <el-card shadow="hover" @click="goto('/detail')">
-            <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-              class="image" />
-          </el-card>
-        </el-col>
-        <el-col :span="4">
-          <el-card shadow="hover" @click="goto('https://pkuhelper.pku.edu.cn/hole/')">
-            <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-              class="image" />
-          </el-card>
-        </el-col>
-        <el-col :span="4">
-          <el-card shadow="hover" @click="goto('/detail')">
-            <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-              class="image" />
-          </el-card>
-        </el-col>
-        <el-col :span="4">
-          <el-card shadow="hover" @click="goto('/detail')">
-            <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-              class="image" />
-          </el-card>
-        </el-col>
-        <el-col :span="4">
-          <el-card shadow="hover" @click="jump">
-            <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-              class="image" />
-          </el-card>
-        </el-col>
-      </el-row>
-    </el-row>
-  </div>
-  <el-pagination background layout="prev, pager, next" :total="1000" />
-  <el-icon @click="goto('/post')"><CirclePlus /></el-icon>
-  </template>
+    </div>
+  </el-container>
+  <el-icon class="circleplus-icon" @click="goto('/post')">
+    <CirclePlus />
+  </el-icon>
+</template>
+
+<script setup>
+import NavBar from "../../components/NavBar.vue"
+</script>
+
 <script>
-import { ElRow, ElCol, ElCard, ElDivider, ElButton,ElCascader,ElPagination,ElIcon } from 'element-plus';
+import { ElRow, ElCol, ElCard, ElDivider, ElButton, ElCascader, ElPagination, ElIcon,ElContainer,ElHeader } from 'element-plus';
 import { defineComponent, reactive } from 'vue';
 import '../../../node_modules/element-plus/theme-chalk/index.css'
 export default defineComponent({
@@ -118,6 +129,8 @@ export default defineComponent({
     ElCascader,
     ElPagination,
     ElIcon,
+    ElContainer,
+    ElHeader,
   },
   data() {
     return {
@@ -202,6 +215,21 @@ export default defineComponent({
 </script>
 
 <style scoped>
+.el-container{
+  height: 100%;
+  width: 100%;
+}
+.el-header{
+  padding: 0;
+}
+.el-cascader{
+  text-align: center;
+  left: 37.5%;
+  width: 50%;
+}
+ /* .el-pagination{
+  left: 35%;
+}  */
 .father {
   height: 100%;
   width: 100%;
@@ -209,7 +237,7 @@ export default defineComponent({
 
 .sonthree {
   /* height: 70%; */
-  top: 25%;
+  /* top: 10%; */
   width: 100%;
 }
 
@@ -237,4 +265,9 @@ export default defineComponent({
   height: 12vw;
   width: 12vw;
 }
-</style>
+
+.circleplus-icon{
+  font-size: 100px;
+  color: #8c939d;
+  left: 90%;
+}
