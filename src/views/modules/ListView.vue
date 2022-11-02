@@ -3,10 +3,10 @@
     <el-header>
       <NavBar />
     </el-header>
-    <el-input size="large" class="w-50 m-2" placeholder="搜索" @keyup.enter="search()"></el-input>
-    <el-cascader v-model="tempvalue" :options="options1" :show-all-levels='true' />
-    <el-pagination  background layout="prev, pager, next" :total="1000" />
-    <div class="father"> 
+    <el-input size="large" class="w-50 m-2" placeholder="搜索" style="width:40%;left:30%;top:2%;" @keyup.enter="search()">
+    </el-input>
+    <el-cascader style="top:4%;width:20%;left:40%;" v-model="tempvalue" :options="options1" :show-all-levels='true' />
+    <div class="father" style="top:8%;">
       <el-row class="sonthree">
         <el-row class="grandsonone" justify="center">
           <el-col :span="4">
@@ -105,11 +105,15 @@
           </el-col>
         </el-row>
       </el-row>
+      <el-pagination style="top:2%;" background layout="prev, pager, next" :total="1000"></el-pagination>
+      <el-icon class="circleplus-icon" @click="goto('/post')">
+        <CirclePlus />
+      </el-icon>
     </div>
   </el-container>
-  <el-icon class="circleplus-icon" @click="goto('/post')">
-    <CirclePlus />
-  </el-icon>
+
+
+
 </template>
 
 <script setup>
@@ -117,7 +121,7 @@ import NavBar from "../../components/NavBar.vue"
 </script>
 
 <script>
-import { ElRow, ElCol, ElCard, ElDivider, ElButton, ElCascader, ElPagination, ElIcon,ElContainer,ElHeader,ElInput } from 'element-plus';
+import { ElRow, ElCol, ElCard, ElDivider, ElButton, ElCascader, ElPagination, ElIcon, ElContainer, ElHeader, ElInput } from 'element-plus';
 import { defineComponent, reactive } from 'vue';
 import '../../../node_modules/element-plus/theme-chalk/index.css';
 export default defineComponent({
@@ -217,19 +221,22 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.el-container{
+.el-container {
   height: 100%;
   width: 100%;
 }
-.el-header{
+
+.el-header {
   padding: 0;
 }
-.el-cascader{
+
+.el-cascader {
   text-align: center;
   left: 37.5%;
   width: 50%;
 }
- /* .el-pagination{
+
+/* .el-pagination{
   left: 35%;
 }  */
 .father {
@@ -268,9 +275,9 @@ export default defineComponent({
   width: 12vw;
 }
 
-.circleplus-icon{
+.circleplus-icon {
   font-size: 100px;
   color: #8c939d;
-  left: 90%;
+  left: 85%;
 }
 </style>
