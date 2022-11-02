@@ -3,10 +3,9 @@
     <el-header>
       <NavBar />
     </el-header>
-    <div class="post">
-      发布页面
-    </div>
-    <el-input v-model="input1" placeholder="标题" />
+
+    <el-input v-model="input1" style="width:40%; left:30%;" placeholder="标题" />
+    <div class style="font-family:'Times New Roman', Times, serif;text-align: center;">分类</div>
     <div class="poston">
       <el-select v-model="value1" placeholder="请选择">
         <el-option v-for="item in options1" :key="item.value1" :label="item.label" :value="item.value1"
@@ -70,13 +69,20 @@
         </div>
       </div>
     </div>
+    <div class style="font-family:'Times New Roman', Times, serif;text-align: center;">上传相关图片</div>
     <div class="picture-add">
       <Upload />
     </div>
-    <el-input v-model="input2" placeholder="详情" />
-    <el-button>
-      发布
+    <div class style="font-family: 'Times New Roman', Times, serif;text-align: center;">具体描述</div>
+    <el-input style="left:20%; width:60%;height:20%;" v-model="input2" />
+    <el-button shadow="hover" type="post" round>
+      发 布
     </el-button>
+
+    <br />
+    <br />
+    <br />
+    <br />
     value1:{{ value1 }}
     value2:{{ value2 }}
     value3:{{ tempvalue }}
@@ -250,68 +256,68 @@ export default defineComponent({
       options12: [
         {
           label: "买",
-          value:'121',
+          value: '121',
           children: [
             {
-              value:'1211',
+              value: '1211',
               label: "小说",
             },
             {
-              value:'1212',
+              value: '1212',
               label: "戏剧",
             },
             {
-              value:'1213',
+              value: '1213',
               label: "诗歌",
             },
             {
-              value:'1214',
+              value: '1214',
               label: "科幻",
             },
             {
-              value:'1215',
+              value: '1215',
               label: "经管",
             },
             {
-              value:'1216',
+              value: '1216',
               label: "生活",
             },
             {
-              value:'1217',
+              value: '1217',
               label: "其他"
             }
           ],
         },
         {
           label: "卖",
-          value:"122",
+          value: "122",
           children: [
             {
-              value:"1221",
+              value: "1221",
               label: "小说",
             },
             {
-              value:"1222",
+              value: "1222",
               label: "戏剧",
             },
             {
-              value:"1223",
+              value: "1223",
               label: "诗歌",
             },
             {
-              value:"1224",
+              value: "1224",
               label: "科幻",
             },
             {
-              value:"1225",
+              value: "1225",
               label: "经管",
             },
             {
-              value:"1226",
+              value: "1226",
               label: "生活",
             },
             {
-              value:"1227",
+              value: "1227",
               label: "其他"
             }
           ],
@@ -350,30 +356,30 @@ export default defineComponent({
         },
         {
           label: "卖",
-          value:'132',
+          value: '132',
           children: [
             {
-              value:'1321',
+              value: '1321',
               label: "宿舍用电器",
             },
             {
-              value:'1322',
+              value: '1322',
               label: "数码用品",
             },
             {
-              value:'1323',
+              value: '1323',
               label: "交通工具",
             },
             {
-              value:'1324',
+              value: '1324',
               label: "二手服装",
             },
             {
-              value:'1325',
+              value: '1325',
               label: "食品药品",
             },
             {
-              value:'1326',
+              value: '1326',
               label: "其他"
             }
           ],
@@ -382,22 +388,22 @@ export default defineComponent({
       options21: [
         {
           label: "找组",
-          value:'211',
+          value: '211',
           children: [
             {
-              value:'2111',
+              value: '2111',
               label: "理学部",
             },
             {
-              value:'2112',
+              value: '2112',
               label: "经管学部",
             },
             {
-              value:'2113',
+              value: '2113',
               label: "人文学部",
             },
             {
-              value:'2114',
+              value: '2114',
               label: "其他"
             }
           ],
@@ -484,36 +490,36 @@ export default defineComponent({
       options24: [
         {
           label: '找活',
-          value : "241",
+          value: "241",
           children: [
             {
-              value : "2411",
+              value: "2411",
               label: '科研',
             },
             {
-              value : "2412",
+              value: "2412",
               label: '学工',
             },
             {
-              value : "2413",
+              value: "2413",
               label: '实习',
             },
           ]
         },
         {
           label: '招人',
-          value : "242",
+          value: "242",
           children: [
             {
-              value : "2421",
+              value: "2421",
               label: '科研',
             },
             {
-              value : "2422",
+              value: "2422",
               label: '学工',
             },
             {
-              value : "2423",
+              value: "2423",
               label: '实习',
             },
           ]
@@ -521,7 +527,7 @@ export default defineComponent({
       ],
       options31: [
         {
-          value:'311',
+          value: '311',
           label: '理学部',
         },
         {
@@ -539,11 +545,11 @@ export default defineComponent({
           value: '321',
           children: [
             {
-              value:'3211',
+              value: '3211',
               label: '信息科学技术学院',
             },
             {
-              value:'3212',
+              value: '3212',
               label: '光华管理学院',
             },
             {
@@ -630,7 +636,7 @@ export default defineComponent({
         },
         {
           label: '咖啡厅',
-          value:'332',
+          value: '332',
         },
         {
           label: '景点',
@@ -758,5 +764,15 @@ export default defineComponent({
 
 .picture-add {
   text-align: center;
+}
+
+.el-button--post {
+  font-family: "黑体";
+  font-size: 16px;
+  width: 16%;
+  left: 42%;
+  top: 2%;
+  background-color: red;
+  color: white;
 }
 </style>
