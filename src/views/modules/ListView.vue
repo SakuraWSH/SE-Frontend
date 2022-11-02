@@ -3,6 +3,7 @@
     <el-header>
       <NavBar />
     </el-header>
+    <el-input size="large" class="w-50 m-2" placeholder="搜索" @keyup.enter="search()"></el-input>
     <el-cascader v-model="tempvalue" :options="options1" :show-all-levels='true' />
     <el-pagination  background layout="prev, pager, next" :total="1000" />
     <div class="father"> 
@@ -116,9 +117,9 @@ import NavBar from "../../components/NavBar.vue"
 </script>
 
 <script>
-import { ElRow, ElCol, ElCard, ElDivider, ElButton, ElCascader, ElPagination, ElIcon,ElContainer,ElHeader } from 'element-plus';
+import { ElRow, ElCol, ElCard, ElDivider, ElButton, ElCascader, ElPagination, ElIcon,ElContainer,ElHeader,ElInput } from 'element-plus';
 import { defineComponent, reactive } from 'vue';
-import '../../../node_modules/element-plus/theme-chalk/index.css'
+import '../../../node_modules/element-plus/theme-chalk/index.css';
 export default defineComponent({
   components: {
     ElCol,
@@ -131,6 +132,7 @@ export default defineComponent({
     ElIcon,
     ElContainer,
     ElHeader,
+    ElInput,
   },
   data() {
     return {
@@ -271,3 +273,4 @@ export default defineComponent({
   color: #8c939d;
   left: 90%;
 }
+</style>
