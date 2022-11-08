@@ -649,7 +649,37 @@ export default defineComponent({
       tempvalue: [],
     }
   },
+  created(){
+    this.initWebSocket();
+  },
+  unmounted(){
+    this.websock.close();
+  },
   methods: {
+    initWebSocket(){
+      const wsurl = "ws://59.110.140.64";
+      this.websock = new WebSocket(wsurl);
+      this.websock.onmessage = this.websocketonmessage;
+      this.websock.onopen = this.websocketonopen;
+      this.websock.onerror = this.websocketonerror;
+      this.websock.onclose = this.websocketclose;
+    },
+    websocketonopen(){
+      let actions = {"test":"12345"};
+      this.websocketsend(JSON.stringify(actions));
+    },
+    websocketonerror(){
+      this.initWebSocket();
+    },
+    websocketonmessage(e){
+      const redata = JSON.parse(e.data);
+    },
+    websocketsend(Data){
+      this.websock.send(Data);
+    },
+    websocketclose(e){
+      console.log("断开连接",e);
+    },
     goto(router) {
       this.$router.replace(router);
     },
