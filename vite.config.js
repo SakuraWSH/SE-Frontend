@@ -17,10 +17,11 @@ export default defineConfig({
     host: '127.0.0.1',//本机ip
     port: 5173,
     open: true, //自动打开 
+    ws: true,
     //base: "./ ", //生产环境路径
     proxy: {
       '/api': {
-        target: 'http://59.110.140.64',	//实际请求地址
+        target: 'http://127.0.0.1:5001',	//实际请求地址
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
       },
