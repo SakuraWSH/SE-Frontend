@@ -673,6 +673,8 @@ export default defineComponent({
         info: this.input2, 
         picture: "testPicture"}
       );
+      // 这里还要个判断成不成功
+      this.goto('/home')
     },
     goto(router) {
       this.$router.replace(router);
