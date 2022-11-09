@@ -1,6 +1,6 @@
 <template>
     <div class="bar">
-        <img alt="logo" src="../assets/images/logo.png" class="nav-bar-logo" />
+        <img alt="logo" src="../assets/images/logo.png" class="nav-bar-logo" @click="goto('/home')" />
         <el-row :gutter="20">
             <el-col span="6">
                 <el-dropdown>
