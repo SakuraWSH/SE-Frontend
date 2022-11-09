@@ -7,103 +7,17 @@
     </el-input>
     <el-cascader style="top:4%;width:20%;left:40%;" v-model="tempvalue" :options="options1" :show-all-levels='true' />
     <div class="father" style="top:8%;">
-      <el-row class="sonthree">
-        <el-row class="grandsonone" justify="center">
-          <el-col :span="4">
-            <el-card shadow="hover" @click="goto('/detail')">
-              <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-                class="image" />
-            </el-card>
-          </el-col>
-          <el-col :span="4">
-            <el-card shadow="hover" @click="goto('/detail')">
-              <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-                class="image" />
-            </el-card>
-          </el-col>
-          <el-col :span="4">
-            <el-card shadow="hover" @click="goto('/detail')">
-              <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-                class="image" />
-            </el-card>
-          </el-col>
-          <el-col :span="4">
-            <el-card shadow="hover" @click="goto('/detail')">
-              <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-                class="image" />
-            </el-card>
-          </el-col>
-          <el-col :span="4">
-            <el-card shadow="hover" @click="goto('/detail')">
-              <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-                class="image" />
-            </el-card>
-          </el-col>
-        </el-row>
-        <el-row class="grandsontwo" justify="center">
-          <el-col :span="4">
-            <el-card shadow="hover" @click="goto('/detail')">
-              <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-                class="image" />
-            </el-card>
-          </el-col>
-          <el-col :span="4">
-            <el-card shadow="hover" @click="goto('/detail')">
-              <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-                class="image" />
-            </el-card>
-          </el-col>
-          <el-col :span="4">
-            <el-card shadow="hover" @click="goto('/detail')">
-              <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-                class="image" />
-            </el-card>
-          </el-col>
-          <el-col :span="4">
-            <el-card shadow="hover" @click="goto('/detail')">
-              <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-                class="image" />
-            </el-card>
-          </el-col>
-          <el-col :span="4">
-            <el-card shadow="hover" @click="goto('/detail')">
-              <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-                class="image" />
-            </el-card>
-          </el-col>
-        </el-row>
-        <el-row class="grandsonthree" justify="center">
-          <el-col :span="4">
-            <el-card shadow="hover" @click="goto('/detail')">
-              <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-                class="image" />
-            </el-card>
-          </el-col>
-          <el-col :span="4">
-            <el-card shadow="hover" @click="goto('https://pkuhelper.pku.edu.cn/hole/')">
-              <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-                class="image" />
-            </el-card>
-          </el-col>
-          <el-col :span="4">
-            <el-card shadow="hover" @click="goto('/detail')">
-              <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-                class="image" />
-            </el-card>
-          </el-col>
-          <el-col :span="4">
-            <el-card shadow="hover" @click="goto('/detail')">
-              <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-                class="image" />
-            </el-card>
-          </el-col>
-          <el-col :span="4">
-            <el-card shadow="hover" @click="jump">
-              <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-                class="image" />
-            </el-card>
-          </el-col>
-        </el-row>
+      <el-row v-for="(cardRow, index) of cards" :key="index" >
+        <el-col :span="4" v-for="(item, cardCol) of cardRow" :key="item.post_id" :offset="cardCol > 0 ? 2 : 1">
+          <el-card shadow="hover" @click="goto('/detail?pid={{item.post_id}}')">
+            <post-item
+              :key="index"
+              :post_id="item.post_id"
+              :title="item.title"
+              :imgUrl="item.imgUrl"
+            ></post-item>
+          </el-card>
+        </el-col>
       </el-row>
       <el-pagination style="top:2%;" background layout="prev, pager, next" :total="1000"></el-pagination>
       <el-icon class="circleplus-icon" @click="goto('/post')">
@@ -118,6 +32,7 @@
 
 <script setup>
 import NavBar from "../../components/NavBar.vue"
+import { io } from "https://cdn.socket.io/4.3.2/socket.io.esm.min.js";
 </script>
 
 <script>
@@ -137,6 +52,15 @@ export default defineComponent({
     ElContainer,
     ElHeader,
     ElInput,
+    PostItem: {
+      props: ['title', 'imgUrl', 'post_id'],
+      // 这里图片暂时用随机图，因为还得写个图床 = =
+      template: ' \
+        <img style="max-width: 12vw; max-height: 12vw; object-fit: fill;"\
+          src="https://api.likepoems.com/img/sina/nature" \
+        /> \
+        <div>{{title}}</div>'
+    },
   },
   data() {
     return {
@@ -210,11 +134,50 @@ export default defineComponent({
           ],
         }
       ],
+      postItems: [
+        {
+          post_id: 1,
+          title: "test",
+          imgUrl: "noNeedNow"
+        }
+      ]
     }
+  },
+  computed: {
+    cards() {
+      const cards = []
+      this.postItems.forEach((item, index) => {
+        const row = Math.floor(index / 5)
+        if (!cards[row]) {
+          cards[row] = []
+        }
+        cards[row].push(item)
+      })
+      return cards
+    }
+  },
+  created(){
+    this.initWebSocket();
   },
   methods: {
     goto(router) {
       this.$router.replace(router);
+    },
+    initWebSocket(){
+      this.socket = io('127.0.0.1:5001/list');
+      this.socket.on("connect", () => {
+        console.log(this.socket.id); 
+        this.socket.emit('Search Post Info', {
+          tags: this.$route.query.tags,
+          cur_page: 1
+        })
+      });
+      const __this = this;
+      this.socket.on('post_info_response', function(data) {
+        // 还有页码等信息，出于时间关系你们写吧
+        console.log(data.lst)
+        __this.postItems = data.lst;
+      });
     }
   }
 })
@@ -269,12 +232,6 @@ export default defineComponent({
   height: 15vw;
   width: 15vw;
 }
-
-.image {
-  height: 12vw;
-  width: 12vw;
-}
-
 .circleplus-icon {
   font-size: 100px;
   color: #8c939d;

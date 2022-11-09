@@ -14,7 +14,7 @@
         </div>
         <el-row class="home-row" justify="center">
           <el-col span="8" class="home-col">
-            <div class="home-square" @click="goto('/list')" @mouseenter="mouseOn = 1" @mouseleave="mouseOn = 0">
+            <div class="home-square" @click="goto('/list?tags=11')" @mouseenter="mouseOn = 1" @mouseleave="mouseOn = 0">
               <el-icon v-if="mouseOn != 1">
                 <DocumentChecked />
               </el-icon>
@@ -25,7 +25,7 @@
             </div>
           </el-col>
           <el-col span="8" class="home-col">
-            <div class="home-square" @click="goto('/list')" @mouseenter="mouseOn = 2" @mouseleave="mouseOn = 0">
+            <div class="home-square" @click="goto('/list?tags=12')" @mouseenter="mouseOn = 2" @mouseleave="mouseOn = 0">
               <el-icon v-if="mouseOn != 2">
                 <Collection />
               </el-icon>
@@ -36,7 +36,7 @@
             </div>
           </el-col>
           <el-col span="8" class="home-col">
-            <div class="home-square" @click="goto('/list')" @mouseenter="mouseOn = 3" @mouseleave="mouseOn = 0">
+            <div class="home-square" @click="goto('/list?tags=13')" @mouseenter="mouseOn = 3" @mouseleave="mouseOn = 0">
               <el-icon v-if="mouseOn != 3">
                 <ShoppingCartFull />
               </el-icon>
@@ -57,7 +57,7 @@
         </div>
         <el-row class="home-row" justify="center">
           <el-col span="6" class="home-col">
-            <div class="home-square" @click="goto('/list')" @mouseenter="mouseOn = 4" @mouseleave="mouseOn = 0">
+            <div class="home-square" @click="goto('/list?tags=21')" @mouseenter="mouseOn = 4" @mouseleave="mouseOn = 0">
               <el-icon v-if="mouseOn != 4">
                 <Flag />
               </el-icon>
@@ -68,7 +68,7 @@
             </div>
           </el-col>
           <el-col span="6" class="home-col">
-            <div class="home-square" @click="goto('/list')" @mouseenter="mouseOn = 5" @mouseleave="mouseOn = 0">
+            <div class="home-square" @click="goto('/list?tags=22')" @mouseenter="mouseOn = 5" @mouseleave="mouseOn = 0">
               <el-icon v-if="mouseOn != 5">
                 <Ship />
               </el-icon>
@@ -79,7 +79,7 @@
             </div>
           </el-col>
           <el-col span="6" class="home-col">
-            <div class="home-square" @click="goto('/list')" @mouseenter="mouseOn = 6" @mouseleave="mouseOn = 0">
+            <div class="home-square" @click="goto('/list?tags=23')" @mouseenter="mouseOn = 6" @mouseleave="mouseOn = 0">
               <el-icon v-if="mouseOn != 6">
                 <Connection />
               </el-icon>
@@ -90,7 +90,7 @@
             </div>
           </el-col>
           <el-col span="6" class="home-col">
-            <div class="home-square" @click="goto('/list')" @mouseenter="mouseOn = 7" @mouseleave="mouseOn = 0">
+            <div class="home-square" @click="goto('/list?tags=24')" @mouseenter="mouseOn = 7" @mouseleave="mouseOn = 0">
               <el-icon v-if="mouseOn != 7">
                 <SuitcaseLine />
               </el-icon>
@@ -111,7 +111,7 @@
         </div>
         <el-row class="home-row bottom-row" justify="center">
           <el-col span="6" class="home-col">
-            <div class="home-square" @click="goto('/list')" @mouseenter="mouseOn = 8" @mouseleave="mouseOn = 0">
+            <div class="home-square" @click="goto('/list?tags=31')" @mouseenter="mouseOn = 8" @mouseleave="mouseOn = 0">
               <el-icon v-if="mouseOn != 8">
                 <Checked />
               </el-icon>
@@ -122,7 +122,7 @@
             </div>
           </el-col>
           <el-col span="6" class="home-col">
-            <div class="home-square" @click="goto('/list')" @mouseenter="mouseOn = 9" @mouseleave="mouseOn = 0">
+            <div class="home-square" @click="goto('/list?tags=32')" @mouseenter="mouseOn = 9" @mouseleave="mouseOn = 0">
               <el-icon v-if="mouseOn != 9">
                 <Guide />
               </el-icon>
@@ -133,7 +133,7 @@
             </div>
           </el-col>
           <el-col span="6" class="home-col">
-            <div class="home-square" @click="goto('/list')" @mouseenter="mouseOn = 10" @mouseleave="mouseOn = 0">
+            <div class="home-square" @click="goto('/list?tags=33')" @mouseenter="mouseOn = 10" @mouseleave="mouseOn = 0">
               <el-icon v-if="mouseOn != 10">
                 <School />
               </el-icon>
@@ -144,7 +144,7 @@
             </div>
           </el-col>
           <el-col span="6" class="home-col">
-            <div class="home-square" @click="goto('/list')" @mouseenter="mouseOn = 11" @mouseleave="mouseOn = 0">
+            <div class="home-square" @click="goto('/list?tags=34')" @mouseenter="mouseOn = 11" @mouseleave="mouseOn = 0">
               <el-icon v-if="mouseOn != 11">
                 <Service />
               </el-icon>

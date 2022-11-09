@@ -654,9 +654,6 @@ export default defineComponent({
   created(){
     this.initWebSocket();
   },
-  unmounted(){
-    this.socket.close();
-  },
   methods: {
     initWebSocket(){
       this.socket = io('127.0.0.1:5001/post');
@@ -665,10 +662,15 @@ export default defineComponent({
       });
     },
     post() {
+      var tags = this.tempvalue[0];
+      if (this.tempvalue.length > 1) {
+        tags = this.tempvalue[1];
+      }
       this.socket.emit('Add Post Info', {
-        headline: "testHeadline", 
-        tags: "testTags", 
-        info: "testInfo", 
+        headline: this.input1, 
+        tags: tags, 
+        price_and_number: this.input3,
+        info: this.input2, 
         picture: "testPicture"}
       );
     },
