@@ -156,6 +156,9 @@
           </el-col>
         </el-row>
       </div>
+      <el-icon class="circleplus-icon" @click="goto('/post')">
+        <CirclePlus />
+      </el-icon>
     </div>
   </el-container>
 
@@ -269,5 +272,11 @@ export default defineComponent({
 
 .bottom-row {
   border-bottom: 2px dashed;
+}
+
+.circleplus-icon {
+  font-size: 100px;
+  color: #8c939d;
+  left: 40%
 }
 </style>
