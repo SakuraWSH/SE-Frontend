@@ -7,6 +7,8 @@ import user from './stores/user'
 
 import './assets/main.css'
 
+import ElementPlus from 'element-plus'
+import 'element-plus/dist/index.css'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import { assert } from '@vue/compiler-core'
 
@@ -15,6 +17,7 @@ const app = createApp(App)
 app.use(createPinia())
 app.use(router)
 app.use(user)
+app.use(ElementPlus)
 
 router.beforeEach((to, from, next) => {
 
