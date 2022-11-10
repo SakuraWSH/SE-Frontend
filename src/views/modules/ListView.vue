@@ -8,7 +8,7 @@
     <el-cascader style="top:4%;width:20%;left:40%;" v-model="tempvalue" :options="options1" :show-all-levels='true' />
     <div class="father" style="top:8%;">
       <el-row v-for="(cardRow, index) of cards" :key="index" >
-        <el-col :span="4" v-for="(item, cardCol) of cardRow" :key="item.post_id" :offset="cardCol > 0 ? 2 : 1">
+        <el-col :span="4" v-for="(item, cardCol) of cardRow" :key="item.post_id" :offset="cardCol > 0 ? 0 : 2">
           <el-card shadow="hover" @click="goto('/detail?pid={{item.post_id}}')">
             <post-item
               :key="index"
