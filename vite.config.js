@@ -6,10 +6,19 @@ import vue from '@vitejs/plugin-vue'
 // export default config
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue()],
+  plugins: [vue({  
+      vueOptions: {  
+          template: {  
+              compilerOptions: {  
+                  isCustomElement: tag => tag.startsWith("")  
+              }  
+          }  
+      }  
+  })],
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
+      'vue': 'vue/dist/vue.esm-bundler.js'
     }
   },
   transplieDependencies:true,
@@ -17,10 +26,11 @@ export default defineConfig({
     host: '127.0.0.1',//本机ip
     port: 5173,
     open: true, //自动打开 
+    ws: true,
     //base: "./ ", //生产环境路径
     proxy: {
       '/api': {
-        target: 'http://59.110.140.64',	//实际请求地址
+        target: 'http://127.0.0.1:5001',	//实际请求地址
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
       },

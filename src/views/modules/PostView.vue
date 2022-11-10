@@ -75,7 +75,7 @@
     </div>
     <div class style="font-family: 'Times New Roman', Times, serif;text-align: center;">具体描述</div>
     <el-input style="left:20%; width:60%;height:20%;" v-model="input2" />
-    <el-button shadow="hover" type="post" round>
+    <el-button shadow="hover" type="post" @click="post()" round>
       发 布
     </el-button>
 
@@ -96,6 +96,8 @@
 import NavBar from "../../components/NavBar.vue"
 import Upload from "../../components/Upload.vue"
 import { ref } from 'vue'
+import { io } from "https://cdn.socket.io/4.3.2/socket.io.esm.min.js";
+
 const input1 = ref('')
 const input2 = ref('')
 const input3 = ref('')
@@ -649,7 +651,31 @@ export default defineComponent({
       tempvalue: [],
     }
   },
+  created(){
+    this.initWebSocket();
+  },
   methods: {
+    initWebSocket(){
+      this.socket = io('127.0.0.1:5001/post');
+      this.socket.on("connect", () => {
+        console.log(this.socket.id); 
+      });
+    },
+    post() {
+      var tags = this.tempvalue[0];
+      if (this.tempvalue.length > 1) {
+        tags = this.tempvalue[1];
+      }
+      this.socket.emit('Add Post Info', {
+        headline: this.input1, 
+        tags: tags, 
+        price_and_number: this.input3,
+        info: this.input2, 
+        picture: "testPicture"}
+      );
+      // 这里还要个判断成不成功
+      this.goto('/home')
+    },
     goto(router) {
       this.$router.replace(router);
     },
