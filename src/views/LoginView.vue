@@ -76,7 +76,7 @@ export default defineComponent({
     }
   },
   methods: {
-    ...mapMutations(["setEmail", "setUsername", "setToken", "setProfile"]),
+    ...mapMutations(["setEmail", "setUsername", "setToken", "setProfile", "setLogin"]),
     initWebSocket() {
       this.socket = io('127.0.0.1:5001/login');
       this.socket.on("connect", () => {
@@ -90,7 +90,29 @@ export default defineComponent({
       });
       const __this = this;
       this.socket.on('post_info_response', function (data) {
-        console.log(data.login_code)
+        switch (data.login_code) {
+          case 0:
+            console.log("login success");
+            setLogin(true);
+            localStorage.setItem("Flag", "isLogin");
+            localStorage.setItem("Email", this.loginForm.email);
+            localStorage.setItem("Username", data.username);
+            localStorage.setItem("Profile", data.profile);
+            this.$router.replace('/home');
+            break;
+          case 1:
+            alert('账号不存在！');
+            this.loginForm.email = '';
+            this.loginForm.password = '';
+            break;
+          case 2:
+            alert('密码错误！');
+            this.loginForm.password = '';
+            break;
+          default:
+            console.log(data.login_code);
+            break;
+        }
       });
     },
     __signUp() {
@@ -105,16 +127,10 @@ export default defineComponent({
       });
     },
     logIn() {
-
-      user.email = this.loginForm.email;
-      user.username = 'Test';
-      user.token = '花拳绣腿';
-      user.profile = '/src/assets/images/default_profile.png'
-
-      this.setEmail(user.email);
-      this.setUsername(user.username);
-      this.setToken(user.token);
-      this.setProfile(user.profile);
+      localStorage.setItem("Flag", "isLogin");
+      localStorage.setItem("Email", this.loginForm.email);
+      localStorage.setItem("Username", "Sam Wong");
+      localStorage.setItem("Profile", "/src/assets/images/default_profile.png");
       this.$router.replace('/home');
     },
     signUp() {

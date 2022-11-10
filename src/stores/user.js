@@ -5,7 +5,8 @@ export default createStore({
         email: 'email@pku.edu.cn',
         username: 'Sam Wong',
         token: '0',
-        profile: '/src/assets/images/default_profile.png'
+        profile: '/src/assets/images/default_profile.png',
+        login: false,
     },
     mutations: {
         setEmail(state, email) {
@@ -20,5 +21,8 @@ export default createStore({
         setProfile(state, profile) {
             state.profile = profile;
         },
+        setLogin(state, login) {
+            state.login = login;
+        }
     }
 })
