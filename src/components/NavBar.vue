@@ -78,8 +78,8 @@
         <div class="profile">
             <el-dropdown>
                 <span class="el-dropdown-link">
-                    <div>{{$store.state.username}}</div>
-                    <img alt="profile" :src="$store.state.profile" @click="goto('/user')" />
+                    <div>{{ username }}</div>
+                    <img alt="profile" :src=profile @click="goto('/user')" />
                     <el-icon class="el-icon--right">
                         <arrow-down />
                     </el-icon>
@@ -124,10 +124,7 @@ export default defineComponent({
             this.$router.replace('/list');
         },
         logout() {
-            this.setEmail('email@pku.edu.cn');
-            this.setUsername('Sam Wong');
-            this.setToken('0');
-            this.setProfile('/src/assets/images/default_profile.png');
+            localStorage.removeItem("Flag");
             this.$router.replace('/');
         }
     }
@@ -138,6 +135,8 @@ export default defineComponent({
 const keyword = reactive({
     keyword: '',
 })
+const username = localStorage.getItem("Username");
+const profile = localStorage.getItem("Profile");
 </script>
 
 
