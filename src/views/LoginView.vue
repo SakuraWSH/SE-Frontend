@@ -1,50 +1,50 @@
 <template>
 
-    <body>
-      <div class="login-block login" v-if="login == 1">
-        <img src="/src/assets/images/logo.png" alt="logo" class="login-logo" />
-        <el-form :model="loginForm" class="login-form">
-          <el-form-item class="login-input">
-            <!-- <el-input v-model="form.name" /> -->
-            <el-input v-model="loginForm.email" size="large" placeholder="邮箱/Email" />
-          </el-form-item>
-          <el-form-item class="login-input">
-            <!-- <el-input v-model="form.desc" /> -->
-            <el-input v-model="loginForm.password" size="large" placeholder="密码/Password" show-password />
-          </el-form-item>
-          <el-form-item class="form-item">
-            <el-button type="primary" round class="button" size="large" @click="logIn()">登录</el-button>
-            <el-button type="primary" round plain class="button" size="large" @click="login = 2">注册</el-button>
-          </el-form-item>
-        </el-form>
-      </div>
-      <div class="login-block signup" v-if="login == 2">
-        <img src="/src/assets/images/logo.png" alt="logo" class="login-logo" />
-        <el-form :model="signupForm" class="login-form">
-          <el-form-item class="login-input">
-            <!-- <el-input v-model="form.name" /> -->
-            <el-input v-model="signupForm.username" size="large" placeholder="用户名/Username" />
-          </el-form-item>
-          <el-form-item class="login-input">
-            <!-- <el-input v-model="form.name" /> -->
-            <el-input v-model="signupForm.email" size="large" placeholder="邮箱/Email" />
-          </el-form-item>
-          <el-form-item class="login-input">
-            <!-- <el-input v-model="form.desc" /> -->
-            <el-input v-model="signupForm.password" size="large" placeholder="密码/Password" show-password />
-          </el-form-item>
-          <el-form-item class="login-input">
-            <!-- <el-input v-model="form.desc" /> -->
-            <el-input v-model="signupForm.passwordComfirm" size="large" placeholder="确认密码/Comfirm Password"
-              show-password />
-          </el-form-item>
-          <el-form-item class="form-item">
-            <el-button type="primary" round plain class="button" size="large" @click="login = 1">返回</el-button>
-            <el-button type="success" round class="button" size="large" @click="signUp()">注册</el-button>
-          </el-form-item>
-        </el-form>
-      </div>
-    </body>
+  <body>
+    <div class="login-block login" v-if="login == 1">
+      <img src="/src/assets/images/logo.png" alt="logo" class="login-logo" />
+      <el-form :model="loginForm" class="login-form">
+        <el-form-item class="login-input">
+          <!-- <el-input v-model="form.name" /> -->
+          <el-input v-model="loginForm.email" size="large" placeholder="邮箱/Email" />
+        </el-form-item>
+        <el-form-item class="login-input">
+          <!-- <el-input v-model="form.desc" /> -->
+          <el-input v-model="loginForm.password" size="large" placeholder="密码/Password" show-password />
+        </el-form-item>
+        <el-form-item class="form-item">
+          <el-button type="primary" round class="button" size="large" @click="logIn()">登录</el-button>
+          <el-button type="primary" round plain class="button" size="large" @click="login = 2">注册</el-button>
+        </el-form-item>
+      </el-form>
+    </div>
+    <div class="login-block signup" v-if="login == 2">
+      <img src="/src/assets/images/logo.png" alt="logo" class="login-logo" />
+      <el-form :model="signupForm" class="login-form">
+        <el-form-item class="login-input">
+          <!-- <el-input v-model="form.name" /> -->
+          <el-input v-model="signupForm.username" size="large" placeholder="用户名/Username" />
+        </el-form-item>
+        <el-form-item class="login-input">
+          <!-- <el-input v-model="form.name" /> -->
+          <el-input v-model="signupForm.email" size="large" placeholder="邮箱/Email" />
+        </el-form-item>
+        <el-form-item class="login-input">
+          <!-- <el-input v-model="form.desc" /> -->
+          <el-input v-model="signupForm.password" size="large" placeholder="密码/Password" show-password />
+        </el-form-item>
+        <el-form-item class="login-input">
+          <!-- <el-input v-model="form.desc" /> -->
+          <el-input v-model="signupForm.passwordComfirm" size="large" placeholder="确认密码/Comfirm Password"
+            show-password />
+        </el-form-item>
+        <el-form-item class="form-item">
+          <el-button type="primary" round plain class="button" size="large" @click="login = 1">返回</el-button>
+          <el-button type="success" round class="button" size="large" @click="signUp()">注册</el-button>
+        </el-form-item>
+      </el-form>
+    </div>
+  </body>
 </template>
 
 
@@ -52,6 +52,7 @@
 import { ElForm, ElFormItem, ElInput, ElButton, ElImage, ElCard } from 'element-plus';
 import { defineComponent, reactive, ref } from 'vue';
 import { mapMutations } from 'vuex';
+import { io } from "https://cdn.socket.io/4.3.2/socket.io.esm.min.js";
 import '../../node_modules/element-plus/theme-chalk/index.css'
 import user from '../stores/user';
 export default defineComponent({
@@ -76,6 +77,33 @@ export default defineComponent({
   },
   methods: {
     ...mapMutations(["setEmail", "setUsername", "setToken", "setProfile"]),
+    initWebSocket() {
+      this.socket = io('127.0.0.1:5001/login');
+      this.socket.on("connect", () => {
+        console.log(this.socket.id);
+      });
+    },
+    __logIn() {
+      this.socket.emit('Login Info', {
+        email: this.email,
+        password: this.password
+      });
+      const __this = this;
+      this.socket.on('post_info_response', function (data) {
+        console.log(data.login_code)
+      });
+    },
+    __signUp() {
+      this.socket.emit('Signup Info', {
+        username: this.username,
+        email: this.email,
+        password: this.password
+      });
+      const __this = this;
+      this.socket.on('post_info_response', function (data) {
+        console.log(data.regist_code)
+      });
+    },
     logIn() {
 
       user.email = this.loginForm.email;
