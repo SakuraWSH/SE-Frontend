@@ -124,15 +124,20 @@ export default defineComponent({
             this.$router.replace('/list');
         },
         logout() {
-            localStorage.removeItem("Flag");
             axios({
                 method: "post",
                 url: "/api/logout/",
                 data: {
                     logout: true,
                 },
+            }).then(response => {
+                if (response.data.logout_code == 1) {
+                    localStorage.removeItem("Flag");
+                    this.$router.replace('/');
+                } else {
+                    alert("登出失败！");
+                }
             });
-            this.$router.replace('/');
         }
     }
 })
