@@ -51,7 +51,8 @@
 <script>
 import { ElForm, ElFormItem, ElInput, ElButton, ElImage, ElCard } from 'element-plus';
 import { defineComponent, reactive, ref } from 'vue';
-import { mapMutations } from 'vuex';
+import { mapMutations } from 'vuex'; 
+import axios from 'axios';
 import { io } from "https://cdn.socket.io/4.3.2/socket.io.esm.min.js";
 import '../../node_modules/element-plus/theme-chalk/index.css'
 import user from '../stores/user';
@@ -166,28 +167,28 @@ export default defineComponent({
           password: this.loginForm.password,
         },
       }).then(data => {
-        switch (data.login_code) {
-          case 0:
+        console.log(data);
+        switch (data.data.login_code) {
+          case '0':
             console.log("login success");
-            setLogin(true);
             localStorage.setItem("Flag", "isLogin");
             localStorage.setItem("Email", this.loginForm.email);
-            localStorage.setItem("Username", data.username);
+            localStorage.setItem("Username", data.data.username);
             // localStorage.setItem("Profile", data.profile);
             localStorage.setItem("Profile", "/src/assets/images/default_profile.png");
             this.$router.replace('/home');
             break;
-          case 1:
+          case '1':
             alert('账号不存在！');
             this.loginForm.email = '';
             this.loginForm.password = '';
             break;
-          case 2:
+          case '2':
             alert('密码错误！');
             this.loginForm.password = '';
             break;
           default:
-            console.log(data.login_code);
+            console.log(data.data.login_code);
             break;
         }
       });
@@ -202,10 +203,9 @@ export default defineComponent({
           password: this.signupForm.password,
         },
       }).then(data => {
-        switch (data.regist_code) {
-          case 0:
+        switch (data.data.regist_code) {
+          case '0':
             console.log("signup success");
-            setLogin(true);
             localStorage.setItem("Flag", "isLogin");
             localStorage.setItem("Email", this.signupForm.email);
             localStorage.setItem("Username", this.signupForm.username);
@@ -213,12 +213,12 @@ export default defineComponent({
             this.$router.replace('/home');
             break;
 
-          case -1:
+          case '-1':
             alert("请填写完整信息！");
             this.signupForm.password = "";
             break;
 
-          case 1:
+          case '1':
             alert("该邮箱已被注册！");
             this.signupForm.email = "";
             this.signupForm.password = "";
