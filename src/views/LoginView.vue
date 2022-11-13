@@ -116,6 +116,12 @@ export default defineComponent({
       });
     },
     __signUp() {
+      if (this.signupForm.password != this.signupForm.passwordComfirm) {
+        alert('两次密码不同，请重试！');
+        this.signupForm.password = '';
+        this.signupForm.passwordComfirm = '';
+        return;
+      }
       this.socket.emit('Signup Info', {
         username: this.username,
         email: this.email,
@@ -123,8 +129,78 @@ export default defineComponent({
       });
       const __this = this;
       this.socket.on('post_info_response', function (data) {
-        console.log(data.regist_code)
+        switch (data.regist_code) {
+          case 0:
+            console.log("signup success");
+            setLogin(true);
+            localStorage.setItem("Flag", "isLogin");
+            localStorage.setItem("Email", this.signupForm.email);
+            localStorage.setItem("Username", this.signupForm.username);
+            localStorage.setItem("Profile", "/src/assets/images/default_profile.png");
+            this.$router.replace('/home');
+            break;
+
+          case -1:
+            alert("请填写完整信息！");
+            this.signupForm.password = "";
+            break;
+
+          case 1:
+            alert("该邮箱已被注册！");
+            this.signupForm.email = "";
+            this.signupForm.password = "";
+            this.signupForm.username = "";
+            break;
+
+          default:
+            break;
+        }
       });
+    },
+    _logIn() {
+      axios({
+        method: "post",
+        url: "/api/login/",
+        data: {
+          email: this.loginForm.email,
+          password: this.loginForm.password,
+        },
+      }).then(data => {
+        switch (data.login_code) {
+          case 0:
+            console.log("login success");
+            setLogin(true);
+            localStorage.setItem("Flag", "isLogin");
+            localStorage.setItem("Email", this.loginForm.email);
+            localStorage.setItem("Username", data.username);
+            localStorage.setItem("Profile", data.profile);
+            this.$router.replace('/home');
+            break;
+          case 1:
+            alert('账号不存在！');
+            this.loginForm.email = '';
+            this.loginForm.password = '';
+            break;
+          case 2:
+            alert('密码错误！');
+            this.loginForm.password = '';
+            break;
+          default:
+            console.log(data.login_code);
+            break;
+        }
+      });
+    },
+    _signUp() {
+      axios({
+        method: "post",
+        url: "/api/login/",
+        data: {
+          username: this.signupForm.username,
+          email: this.signupForm.email,
+          password: this.signupForm.password,
+        },
+      }).then(data => { });
     },
     logIn() {
       localStorage.setItem("Flag", "isLogin");
