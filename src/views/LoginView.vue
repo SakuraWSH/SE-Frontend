@@ -173,7 +173,8 @@ export default defineComponent({
             localStorage.setItem("Flag", "isLogin");
             localStorage.setItem("Email", this.loginForm.email);
             localStorage.setItem("Username", data.username);
-            localStorage.setItem("Profile", data.profile);
+            // localStorage.setItem("Profile", data.profile);
+            localStorage.setItem("Profile", "/src/assets/images/default_profile.png");
             this.$router.replace('/home');
             break;
           case 1:
@@ -194,7 +195,7 @@ export default defineComponent({
     _signUp() {
       axios({
         method: "post",
-        url: "/api/login/",
+        url: "/api/regist/",
         data: {
           username: this.signupForm.username,
           email: this.signupForm.email,
