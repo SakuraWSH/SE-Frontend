@@ -13,7 +13,7 @@
           <el-input v-model="loginForm.password" size="large" placeholder="密码/Password" show-password />
         </el-form-item>
         <el-form-item class="form-item">
-          <el-button type="primary" round class="button" size="large" @click="_logIn()">登录</el-button>
+          <el-button type="primary" round class="button" size="large" @click="logIn()">登录</el-button>
           <el-button type="primary" round plain class="button" size="large" @click="login = 2">注册</el-button>
         </el-form-item>
       </el-form>
@@ -40,7 +40,7 @@
         </el-form-item>
         <el-form-item class="form-item">
           <el-button type="primary" round plain class="button" size="large" @click="login = 1">返回</el-button>
-          <el-button type="success" round class="button" size="large" @click="_signUp()">注册</el-button>
+          <el-button type="success" round class="button" size="large" @click="signUp()">注册</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -51,11 +51,10 @@
 <script>
 import { ElForm, ElFormItem, ElInput, ElButton, ElImage, ElCard } from 'element-plus';
 import { defineComponent, reactive, ref } from 'vue';
-import { mapMutations } from 'vuex'; 
+import { mapMutations } from 'vuex';
 import axios from 'axios';
 import { io } from "https://cdn.socket.io/4.3.2/socket.io.esm.min.js";
 import '../../node_modules/element-plus/theme-chalk/index.css'
-import user from '../stores/user';
 export default defineComponent({
   components: {
     ElForm,
@@ -158,7 +157,12 @@ export default defineComponent({
         }
       });
     },
-    _logIn() {
+    logIn() {
+      // for development
+      localStorage.setItem("Flag", "isLogin");
+      this.$router.replace('/home');
+      return;
+
       axios({
         method: "post",
         url: "/api/login/",
@@ -193,7 +197,7 @@ export default defineComponent({
         }
       });
     },
-    _signUp() {
+    signUp() {
       axios({
         method: "post",
         url: "/api/regist/",
@@ -230,27 +234,6 @@ export default defineComponent({
         }
       });
     },
-    logIn() {
-      localStorage.setItem("Flag", "isLogin");
-      localStorage.setItem("Email", this.loginForm.email);
-      localStorage.setItem("Username", "Sam Wong");
-      localStorage.setItem("Profile", "/src/assets/images/default_profile.png");
-      this.$router.replace('/home');
-    },
-    signUp() {
-      console.log(this.signupForm.username);
-      console.log(this.signupForm.email);
-      console.log(this.signupForm.password);
-      console.log(this.signupForm.passwordComfirm);
-
-      if (this.signupForm.password == this.signupForm.passwordComfirm) {
-        this.login = 1;
-      } else {
-        alert('两次密码不同，请重试！');
-        this.signupForm.password = '';
-        this.signupForm.passwordComfirm = '';
-      }
-    }
   }
 })
 </script>
