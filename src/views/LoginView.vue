@@ -13,7 +13,7 @@
           <el-input v-model="loginForm.password" size="large" placeholder="密码/Password" show-password />
         </el-form-item>
         <el-form-item class="form-item">
-          <el-button type="primary" round class="button" size="large" @click="logIn()">登录</el-button>
+          <el-button type="primary" round class="button" size="large" @click="_logIn()">登录</el-button>
           <el-button type="primary" round plain class="button" size="large" @click="login = 2">注册</el-button>
         </el-form-item>
       </el-form>
@@ -40,7 +40,7 @@
         </el-form-item>
         <el-form-item class="form-item">
           <el-button type="primary" round plain class="button" size="large" @click="login = 1">返回</el-button>
-          <el-button type="success" round class="button" size="large" @click="signUp()">注册</el-button>
+          <el-button type="success" round class="button" size="large" @click="_signUp()">注册</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -200,7 +200,34 @@ export default defineComponent({
           email: this.signupForm.email,
           password: this.signupForm.password,
         },
-      }).then(data => { });
+      }).then(data => {
+        switch (data.regist_code) {
+          case 0:
+            console.log("signup success");
+            setLogin(true);
+            localStorage.setItem("Flag", "isLogin");
+            localStorage.setItem("Email", this.signupForm.email);
+            localStorage.setItem("Username", this.signupForm.username);
+            localStorage.setItem("Profile", "/src/assets/images/default_profile.png");
+            this.$router.replace('/home');
+            break;
+
+          case -1:
+            alert("请填写完整信息！");
+            this.signupForm.password = "";
+            break;
+
+          case 1:
+            alert("该邮箱已被注册！");
+            this.signupForm.email = "";
+            this.signupForm.password = "";
+            this.signupForm.username = "";
+            break;
+
+          default:
+            break;
+        }
+      });
     },
     logIn() {
       localStorage.setItem("Flag", "isLogin");

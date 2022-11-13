@@ -125,6 +125,13 @@ export default defineComponent({
         },
         logout() {
             localStorage.removeItem("Flag");
+            axios({
+                method: "post",
+                url: "/api/logout/",
+                data: {
+                    logout: true,
+                },
+            });
             this.$router.replace('/');
         }
     }
