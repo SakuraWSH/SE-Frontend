@@ -14,9 +14,11 @@
         </div>
       </div>
       <div class="rightdetail">
-        <div class="title">这里是标题</div>
+        <div class="title">{{detailItems.headline}}</div>
         <el-divider></el-divider>
         <div class="ps">
+          {{ detailItems.info }}
+          <!-- 这里是描述<br />
           这里是描述<br />
           这里是描述<br />
           这里是描述<br />
@@ -24,9 +26,9 @@
           这里是描述<br />
           这里是描述<br />
           这里是描述<br />
-          这里是描述<br />
-          这里是描述</div>
-        <div class="price">￥114.514</div>
+          这里是描述 -->
+        </div>
+        <div class="price">{{detailItems.price_and_number}}</div>
         <el-row>
           <el-button shadow="hover" type="buy" round>购买</el-button>
           <el-button shadow="hover" type="contact" round>联系发布者</el-button>
@@ -67,6 +69,12 @@ export default defineComponent({
     return {
       imgList: ["https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png", "https://img1.baidu.com/it/u=691823892,2308173677&fm=253&fmt=auto&app=138&f=JPEG?w=861&h=500"],
       currentIndex: 0,
+      detailItems:[{
+        headline:'',
+        info:'',
+        picture:'',
+        price_and_number:'',
+      }],
     }
   },
   created(){
@@ -80,14 +88,15 @@ export default defineComponent({
       this.socket = io('127.0.0.1:5001/detail');
       this.socket.on("connect", () => {
         console.log(this.socket.id);
+        console.log(this.$route.query.pid);
         this.socket.emit('Open Post Info', {
-          pid: this.$route.query.pid,
+          id: this.$route.query.pid,
         })
       });
       const __this = this;
       this.socket.on('post_info_response',function(data) {
-        console.log(data.lst)
-        __this.detailItems = data.lst;
+        console.log(data);
+        __this.detailItems = data;
       });
     }
   },

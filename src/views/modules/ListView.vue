@@ -9,7 +9,7 @@
     <div class="father" style="top:8%;">
       <el-row v-for="(cardRow, index) of cards" :key="index" >
         <el-col :span="4" v-for="(item, cardCol) of cardRow" :key="item.post_id" :offset="cardCol > 0 ? 0 : 2">
-          <el-card shadow="hover" @click="goto('/detail?pid={{item.post_id}}')">
+          <el-card shadow="hover" @click="goto_Detail(item.post_id)">
             <post-item
               :key="index"
               :post_id="item.post_id"
@@ -162,6 +162,14 @@ export default defineComponent({
   methods: {
     goto(router) {
       this.$router.replace(router);
+    },
+    goto_Detail(pid){
+      this.$router.push({
+        path: 'detail',
+        query: {
+          pid: pid
+        }
+      })
     },
     initWebSocket(){
       this.socket = io('127.0.0.1:5001/list');
