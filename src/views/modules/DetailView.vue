@@ -43,6 +43,7 @@
 
 <script setup>
 import NavBar from "../../components/NavBar.vue"
+import { io } from "https://cdn.socket.io/4.3.2/socket.io.esm.min.js";
 </script>
 
 <script>
@@ -68,9 +69,26 @@ export default defineComponent({
       currentIndex: 0,
     }
   },
+  created(){
+    this.initWebSocket();
+  },
   methods: {
     gotoPage(index) {
       this.currentIndex = index;
+    },
+    initWebSocket(){
+      this.socket = io('127.0.0.1:5001/detail');
+      this.socket.on("connect", () => {
+        console.log(this.socket.id);
+        this.socket.emit('Open Post Info', {
+          pid: this.$route.query.pid,
+        })
+      });
+      const __this = this;
+      this.socket.on('post_info_response',function(data) {
+        console.log(data.lst)
+        __this.detailItems = data.lst;
+      });
     }
   },
   computed: {
