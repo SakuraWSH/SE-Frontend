@@ -70,15 +70,23 @@
       </div>
     </div>
     <div class style="font-family:'Times New Roman', Times, serif;text-align: center;">上传相关图片</div>
-    <div class="picture-add">
-      <Upload />
+    <div class="imgUpload">
+      <ul v-for="(imgStr, index) in imgList">
+        <el-card><img :src="imgStr" alt="Error"></el-card>
+      </ul>
+      <label for="upload">
+        <el-icon class="plus-icon">
+          <Plus />
+        </el-icon>
+      </label>
+      <input type="file" accept="image/jpeg/*" @change="getPicture($event)" id="upload" />
     </div>
     <div class style="font-family: 'Times New Roman', Times, serif;text-align: center;">具体描述</div>
     <el-input style="left:20%; width:60%;height:20%;" v-model="input2" />
     <el-button shadow="hover" type="post" @click="post()" round>
       发 布
     </el-button>
-
+    
     <br />
     <br />
     <br />
@@ -97,10 +105,12 @@ import NavBar from "../../components/NavBar.vue"
 import Upload from "../../components/Upload.vue"
 import { ref } from 'vue'
 import { io } from "https://cdn.socket.io/4.3.2/socket.io.esm.min.js";
+import axios from 'axios';
 
 const input1 = ref('')
 const input2 = ref('')
 const input3 = ref('')
+const imgList = reactive([]);
 </script>
 
 <script>
@@ -655,6 +665,36 @@ export default defineComponent({
     this.initWebSocket();
   },
   methods: {
+    uploadImage() {
+      const file = document.querySelector('input[type=file]').files[0];
+      const reader = new FileReader();
+
+      reader.onloadend = () => {
+        this.imgList.push(reader.result);
+      }
+      reader.readAsDataURL(file);
+    },
+    getPicture(e) {
+      var formData = new FormData();
+      formData.append("smfile", e.target.files[0]);
+      // const file = document.querySelector('input[type=file]').files[0];
+      // const reader = new FileReader();
+
+      // reader.onloadend = () => {
+      //   this.imgList.push(reader.result);
+      // }
+      // reader.readAsDataURL(file);
+      axios({
+        // 请求类型
+        method: "POST",
+        url: "/upload",//sm.ms图床
+        headers:{'Content-Type':'multipart/form-data','Authorization':'fsJvQUy5HHkm38oHL3HZpwXLYPEfjAVP'},
+        data:formData
+      }).then((response) => {
+        // 在控制台输出响应体中图片在服务器中的url地址
+        console.log(response.data)//response.data就有返回的图片地址
+      });
+    }, 
     initWebSocket(){
       this.socket = io('127.0.0.1:5001/post');
       this.socket.on("connect", () => {
@@ -800,5 +840,42 @@ export default defineComponent({
   top: 2%;
   background-color: red;
   color: white;
+}
+
+.imgUpload {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 11vw;
+    margin-left: 5vw;
+    margin-right: 5vw;
+    border: dashed 1px;
+}
+
+ul {
+    list-style: none;
+    display: inline;
+}
+
+.el-card {
+    height: 10vw;
+    width: 10vw;
+    display: inline-block;
+}
+
+.el-card img {
+    width: 100%;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.plus-icon {
+    font-size: 28px;
+    color: #8c939d;
+    width: 178px;
+    height: 178px;
+    text-align: center;
 }
 </style>
