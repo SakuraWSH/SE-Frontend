@@ -159,9 +159,9 @@ export default defineComponent({
     },
     logIn() {
       // for development
-      localStorage.setItem("Flag", "isLogin");
-      this.$router.replace('/home');
-      return;
+      // localStorage.setItem("Flag", "isLogin");
+      // this.$router.replace('/home');
+      // return;
 
       axios({
         method: "post",
