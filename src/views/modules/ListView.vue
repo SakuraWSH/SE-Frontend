@@ -29,7 +29,15 @@
           </el-card>
         </el-col>
       </el-row>
-      <el-pagination style="top:2%;" background layout="prev, pager, next" :total="1000"></el-pagination>
+      <!-- <el-pagination style="top:2%;" background layout="prev, pager, next" :total="2"></el-pagination> -->
+      <el-pagination
+        background
+        :page-size="15"
+        :pager-count="5"
+        layout="prev, pager, next"
+        :total ="total"
+        @current-change="handleCurrentChange">
+      </el-pagination>
       <el-icon class="circleplus-icon" @click="goto('/post')">
         <CirclePlus />
       </el-icon>
@@ -553,6 +561,9 @@ export default defineComponent({
       selectthing9:false,
       selectthing10:false,
       selectthing11:false,
+      total : 100,
+      
+      page : 0,
     }
   },
   computed: {
@@ -572,6 +583,10 @@ export default defineComponent({
     this.initWebSocket();
   },
   methods: {
+    handleCurrentChange(val) {
+      console.log(`当前页: ${val}`);
+      this.page = val
+    },
     goto(router) {
       this.$router.replace(router);
       console.log(this.$route.query.tags)
@@ -631,6 +646,9 @@ export default defineComponent({
         // 还有页码等信息，出于时间关系你们写吧
         console.log(data.lst)
         __this.postItems = data.lst;
+        this.total = data.total_page;
+        console.log(this.total)
+        console.log(data.total_page)
       });
     }
   }

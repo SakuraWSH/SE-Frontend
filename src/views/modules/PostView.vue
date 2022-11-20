@@ -677,13 +677,13 @@ export default defineComponent({
     getPicture(e) {
       var formData = new FormData();
       formData.append("smfile", e.target.files[0]);
-      // const file = document.querySelector('input[type=file]').files[0];
-      // const reader = new FileReader();
+      const file = document.querySelector('input[type=file]').files[0];
+      const reader = new FileReader();
 
-      // reader.onloadend = () => {
-      //   this.imgList.push(reader.result);
-      // }
-      // reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        this.imgList.push(reader.result);
+      }
+      reader.readAsDataURL(file);
       axios({
         // 请求类型
         method: "POST",

@@ -39,6 +39,11 @@ export default defineConfig({
         changeOrigin: true,//虚拟的站点需要更管origin
         secure: true,                   //是否https接口
         rewrite: (path) => path.replace(/^\/upload/, ''),
+        headers: {
+          //这里是最重要的地方，必须要携带Referer请求头，否则服务端会返回500错误码
+          //（如果不加会检测到当前发送的域名不在它的服务器地址下采取安全措施返回500）
+          Referer: 'https://sm.ms/'
+        } 
       }
     }
   },
