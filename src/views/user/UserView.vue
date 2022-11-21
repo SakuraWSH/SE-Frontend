@@ -88,7 +88,10 @@
 
 <script setup>
 import NavBar from "../../components/NavBar.vue"
-import { ref,reactive, toRefs } from 'vue'
+</script>
+
+<script>
+import { ref,reactive, toRefs, defineComponent } from 'vue'
 import { ElTable,ElInput} from 'element-plus'
 import {
   Check,
@@ -100,7 +103,170 @@ import {
 } from '@element-plus/icons-vue'
 //消息-聊天右侧聊天界面样式
 
+export default defineComponent({
 
+  components:{
+    ElCol,
+    ElRow,
+    ElCard,
+    ElDivider,
+    ElButton,
+    ElCascader,
+    ElPagination,
+    ElIcon,
+    ElContainer,
+    ElHeader,
+    ElInput,
+    ElButton,
+    ElMain,
+    ElAside,
+    ElTable,
+    ElTabs,
+    ElTabPane,
+    ElTableColumn,
+    ElDrawer
+  },
+  data(){
+    return{
+      tabPosition: ref('left'),
+      textarea:ref(''),
+      drawer:ref(false),
+      currentDate:ref(new Date()),
+      state : reactive({
+      circleUrl:
+        'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
+      squareUrl:
+        'https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png',
+      }),
+      circleUrl : toRefs(state),
+  tableData : [
+  {
+    date: '2022-11-01',
+    time:'20:30',
+    title: '一起学习软件工程',
+    state: '审核中',
+    city: '课程攻略',
+    zip: 'KC 101',
+  },
+  {
+    date: '2022-10-30',
+    time:'19:30',
+    title: '水一水热度',
+    state: '已发布',
+    city: '吐槽专区',
+    zip: 'TC 203',
+  },
+  {
+    date: '2022-10-30',
+    time:'16:00',
+    title: '一起来看S赛',
+    state: '已发布',
+    city: '吐槽专区',
+    zip: 'TC 189',
+  },
+  {
+    date: '2022-10-25',
+    time:'10:07',
+    title: '出二手无线鼠标~',
+    state: '已发布',
+    city: '日用物品',
+    zip: 'RY 463',
+  },
+  {
+    date: '2022-10-24',
+    time:'14:30',
+    title: '午睡起来还是好困',
+    state: '已发布',
+    city: '吐槽专区',
+    zip: 'TC 52',
+  },
+  {
+    date: '2022-10-23',
+    time:'10:30',
+    title: '出专业课程书了',
+    state: '已发布',
+    city: '书籍专区',
+    zip: 'SJ 34',
+  },
+  {
+    date: '2022-10-20',
+    time:'22:30',
+    title: '我来做第一条',
+    state: '已发布',
+    city: '吐槽专区',
+    zip: 'TC 1',
+  },
+],
+friendData : [
+  {
+    name: 'clem1',
+    time:'2022-11-01 20:30',
+    signal: '未读',
+    context:'今天你学习了吗'
+  },
+  {
+    name: 'clem2',
+    time:'2022-11-01 20:30',
+    signal: '已读',
+    context:'这仅仅是一段展示'
+  },
+  {
+    name: '我是谁',
+    time:'2022-11-01 19:30',
+    signal: '未读',
+    context:'没有实际意义'
+  },
+  {
+    name: '你好',
+    time:'2022-10-23 20:30',
+    signal: '未读',
+    context:'所以我也不知道要编些什么'
+  },
+  {
+    name: 'clem',
+    time:'2022-11-01 20:30',
+    signal: '未读',
+    context:'但是他是可以非常长的6666666666666666666666666666666666666666666'
+  },
+  {
+    name: '姓名也可以很长2333333',
+    time:'2022-11-01 20:30',
+    signal: '未读',
+    context:'今天你学习了吗'
+  },
+  {
+    name: 'clem',
+    time:'2022-11-01 20:30',
+    signal: '未读',
+    context:'今天你学习了吗'
+  },
+  {
+    name: 'clem',
+    time:'2022-11-01 20:30',
+    signal: '未读',
+    context:'今天你学习了吗'
+  },
+  {
+    name: 'clem',
+    time:'2022-11-01 20:30',
+    signal: '未读',
+    context:'今天你学习了吗'
+  },
+  {
+    name: 'clem',
+    time:'2022-11-01 20:30',
+    signal: '未读',
+    context:'今天你学习了吗'
+  },
+ ],
+
+
+
+
+    }
+  },
+
+})
 const tabPosition = ref('left')
 const textarea = ref('')
 const drawer = ref(false)
