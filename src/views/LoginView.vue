@@ -101,15 +101,16 @@ export default defineComponent({
             this.$router.replace('/home');
             break;
           case 1:
-            alert('账号不存在！');
+            this.$message.error('账号不存在！');
             this.loginForm.email = '';
             this.loginForm.password = '';
             break;
           case 2:
-            alert('密码错误！');
+            this.$message.error('密码错误！');
             this.loginForm.password = '';
             break;
           default:
+            this.$message.error(data.login_message);
             console.log(data.login_code);
             break;
         }
@@ -117,7 +118,7 @@ export default defineComponent({
     },
     __signUp() {
       if (this.signupForm.password != this.signupForm.passwordComfirm) {
-        alert('两次密码不同，请重试！');
+        this.$message.error('两次密码不同，请重试！');
         this.signupForm.password = '';
         this.signupForm.passwordComfirm = '';
         return;
@@ -141,12 +142,12 @@ export default defineComponent({
             break;
 
           case -1:
-            alert("请填写完整信息！");
+            this.$message.error("请填写完整信息！");
             this.signupForm.password = "";
             break;
 
           case 1:
-            alert("该邮箱已被注册！");
+            this.$message.error("该邮箱已被注册！");
             this.signupForm.email = "";
             this.signupForm.password = "";
             this.signupForm.username = "";
@@ -183,15 +184,16 @@ export default defineComponent({
             this.$router.replace('/home');
             break;
           case '1':
-            alert('账号不存在！');
+            this.$message.error('账号不存在！');
             this.loginForm.email = '';
             this.loginForm.password = '';
             break;
           case '2':
-            alert('密码错误！');
+            this.$message.error('密码错误！');
             this.loginForm.password = '';
             break;
           default:
+            this.$message.error(data.data.login_message);
             console.log(data.data.login_code);
             break;
         }
@@ -218,12 +220,12 @@ export default defineComponent({
             break;
 
           case '-1':
-            alert("请填写完整信息！");
+            this.$message.error("请填写完整信息！");
             this.signupForm.password = "";
             break;
 
           case '1':
-            alert("该邮箱已被注册！");
+            this.$message.error("该邮箱已被注册！");
             this.signupForm.email = "";
             this.signupForm.password = "";
             this.signupForm.username = "";
