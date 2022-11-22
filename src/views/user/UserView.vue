@@ -265,6 +265,17 @@ friendData : [
 
     }
   },
+  created(){
+    this.initWebsocket();
+  },
+  methods:{
+    initWebsocket(){
+      this.socket = io('127.0.0.1:5001/user');
+      this.socket.on("connect",()=>{
+        console.log(this.socket.id); 
+      })
+    }
+  }
 
 })
 const tabPosition = ref('left')
