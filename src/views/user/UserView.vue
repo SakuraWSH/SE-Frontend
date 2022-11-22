@@ -88,11 +88,12 @@
 
 <script setup>
 import NavBar from "../../components/NavBar.vue"
+import { io } from "https://cdn.socket.io/4.3.2/socket.io.esm.min.js";
 </script>
 
 <script>
-import { ref,reactive, toRefs, defineComponent } from 'vue'
-import { ElTable,ElInput} from 'element-plus'
+import { ref, reactive,toRefs, defineComponent } from 'vue'
+import { ElCol, ElRow, ElCard, ElDivider, ElCascader, ElPagination, ElIcon, ElContainer, ElHeader, ElInput, ElButton, ElMain, ElAside, ElTable, ElTabs, ElTabPane, ElTableColumn, ElDrawer } from 'element-plus';
 import {
   Check,
   Delete,
@@ -110,7 +111,6 @@ export default defineComponent({
     ElRow,
     ElCard,
     ElDivider,
-    ElButton,
     ElCascader,
     ElPagination,
     ElIcon,

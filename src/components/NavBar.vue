@@ -144,6 +144,7 @@ export default defineComponent({
 </script>
 
 <script setup>
+import axios from 'axios';
 const keyword = reactive({
     keyword: '',
 })
