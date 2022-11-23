@@ -278,6 +278,7 @@ friendData : [
   }
 
 })
+/*
 const tabPosition = ref('left')
 const textarea = ref('')
 const drawer = ref(false)
@@ -413,6 +414,7 @@ const friendData = [
     context:'今天你学习了吗'
   },
 ]
+*/
 </script>
 
 <style>
