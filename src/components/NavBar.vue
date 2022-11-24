@@ -86,9 +86,9 @@
                 </span>
                 <template #dropdown>
                     <el-dropdown-menu>
-                        <el-dropdown-item @click="goto('/user')">个人信息</el-dropdown-item>
-                        <el-dropdown-item @click="goto('/user')">发布历史</el-dropdown-item>
-                        <el-dropdown-item @click="goto('/user')">聊天列表</el-dropdown-item>
+                        <el-dropdown-item @click="goto('/user?tab=info')">个人信息</el-dropdown-item>
+                        <el-dropdown-item @click="goto('/user?tab=posts')">发布历史</el-dropdown-item>
+                        <el-dropdown-item @click="goto('/user?tab=messages')">聊天列表</el-dropdown-item>
                         <el-dropdown-item @click="logout()">退出登录</el-dropdown-item>
                     </el-dropdown-menu>
                 </template>
@@ -144,6 +144,7 @@ export default defineComponent({
 </script>
 
 <script setup>
+import axios from 'axios';
 const keyword = reactive({
     keyword: '',
 })

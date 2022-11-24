@@ -7,8 +7,8 @@
       </el-header>
       <el-main>
         <el-aside width="1080px">
-          <el-tabs :tab-position="tabPosition" style="height: 800px" class="demo-tabs">
-          <el-tab-pane label="我的信息">                                                                                                                                                                           
+          <el-tabs v-model="activeTab" :tab-position="tabPosition" style="height: 800px" class="demo-tabs">
+          <el-tab-pane label="我的信息" name="info">                                                                                                                                                                           
             <div class>
             <el-avatar :size="50" :src="circleUrl" /> 
           </div>
@@ -40,7 +40,7 @@
           </div>
           </el-tab-pane>
 
-          <el-tab-pane label="我的发布">
+          <el-tab-pane label="我的发布" name="posts">
             <el-input size="large"  placeholder="搜索
             " >
               <template #prefix>
@@ -50,7 +50,7 @@
               </template>
             </el-input>
 
-            <el-table :data="tableData" @current-change="handleCurrentChange" style="width: 100%" height="500">
+            <el-table :data="tableData" style="width: 100%" height="500">
               <el-table-column fixed prop="date" label="日期" width="150" />
               <el-table-column prop="time" label="时间" width="120" />
               <el-table-column prop="title" label="标题" width="200" />
@@ -60,7 +60,7 @@
             </el-table>
           </el-tab-pane>
 
-          <el-tab-pane label="我的聊天">
+          <el-tab-pane label="我的聊天" name="messages">
             <el-input size="large"  placeholder="搜索
             " >
               <template #prefix>
@@ -88,11 +88,12 @@
 
 <script setup>
 import NavBar from "../../components/NavBar.vue"
+import { io } from "https://cdn.socket.io/4.3.2/socket.io.esm.min.js";
 </script>
 
 <script>
-import { ref,reactive, toRefs, defineComponent } from 'vue'
-import { ElTable,ElInput} from 'element-plus'
+import { ref, reactive,toRefs, defineComponent } from 'vue'
+import { ElCol, ElRow, ElCard, ElDivider, ElCascader, ElPagination, ElIcon, ElContainer, ElHeader, ElInput, ElButton, ElMain, ElAside, ElTable, ElTabs, ElTabPane, ElTableColumn, ElDrawer } from 'element-plus';
 import {
   Check,
   Delete,
@@ -110,7 +111,6 @@ export default defineComponent({
     ElRow,
     ElCard,
     ElDivider,
-    ElButton,
     ElCascader,
     ElPagination,
     ElIcon,
@@ -129,17 +129,18 @@ export default defineComponent({
   data(){
     return{
       tabPosition: ref('left'),
-      textarea:ref(''),
-      drawer:ref(false),
-      currentDate:ref(new Date()),
-      state : reactive({
+      textarea: ref(''),
+      drawer: ref(false),
+      currentDate: ref(new Date()),
+      state: reactive({
       circleUrl:
         'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
       squareUrl:
         'https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png',
       }),
-      circleUrl : toRefs(state),
-  tableData : [
+      circleUrl: toRefs(state),
+      activeTab: 'info',
+      tableData : [
   {
     date: '2022-11-01',
     time:'20:30',
@@ -196,8 +197,8 @@ export default defineComponent({
     city: '吐槽专区',
     zip: 'TC 1',
   },
-],
-friendData : [
+      ],
+      friendData : [
   {
     name: 'clem1',
     time:'2022-11-01 20:30',
@@ -258,17 +259,26 @@ friendData : [
     signal: '未读',
     context:'今天你学习了吗'
   },
- ],
-
-
-
-
+      ],
     }
   },
   created(){
     this.initWebsocket();
   },
+  mounted() {
+    this.selectTab();
+  },
+  watch:{
+    $route(to,from){
+      this.selectTab();
+    }
+  },
   methods:{
+    selectTab() {
+      if(this.$route.query.tab != null){
+        this.activeTab = this.$route.query.tab;
+      }
+    },  
     initWebsocket(){
       this.socket = io('127.0.0.1:5001/user');
       this.socket.on("connect",()=>{
