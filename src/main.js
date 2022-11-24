@@ -27,8 +27,7 @@ router.beforeEach((to, from, next) => {
         next()
 
         if (!to.meta.isLogin) {
-            // iView.Message.error('您已登录')
-            // assert("您已登录！");
+            // this.$message.error('您已登录！');
             next({
                 path: '/home'
             })
@@ -39,7 +38,6 @@ router.beforeEach((to, from, next) => {
             next({
                 path: '/',
             })
-            // assert("您尚未登录！");
         } else {
             next()
         }

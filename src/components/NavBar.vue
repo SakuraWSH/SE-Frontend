@@ -128,14 +128,15 @@ export default defineComponent({
                 method: "post",
                 url: "/api/logout/",
                 data: {
-                    logout: true,
+                    logout: 'True',
                 },
             }).then(response => {
-                if (response.data.logout_code == 1) {
+                if (response.data.logout_code == '1') {
                     localStorage.removeItem("Flag");
                     this.$router.replace('/');
                 } else {
-                    alert("登出失败！");
+                    console.log(response.data.logout_code);
+                    this.$message.error("登出失败！");
                 }
             });
         }

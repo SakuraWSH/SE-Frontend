@@ -183,6 +183,11 @@ export default defineComponent({
             localStorage.setItem("Profile", "/src/assets/images/default_profile.png");
             this.$router.replace('/home');
             break;
+          case '-1':
+            this.$message.error('请输入完整的邮箱与密码信息！');
+            this.loginForm.email = '';
+            this.loginForm.password = '';
+            break;
           case '1':
             this.$message.error('账号不存在！');
             this.loginForm.email = '';
@@ -226,6 +231,13 @@ export default defineComponent({
 
           case '1':
             this.$message.error("该邮箱已被注册！");
+            this.signupForm.email = "";
+            this.signupForm.password = "";
+            this.signupForm.username = "";
+            break;
+
+          case '2':
+            this.$message.error("该邮箱无注册权限，请使用PKU邮箱！");
             this.signupForm.email = "";
             this.signupForm.password = "";
             this.signupForm.username = "";
