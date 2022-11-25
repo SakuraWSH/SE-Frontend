@@ -561,8 +561,7 @@ export default defineComponent({
       selectthing9:false,
       selectthing10:false,
       selectthing11:false,
-      total : 100,
-      
+      total : 0,
       page : 0,
     }
   },
@@ -643,13 +642,17 @@ export default defineComponent({
       });
       const __this = this;
       this.socket.on('post_info_response', function(data) {
-        // 还有页码等信息，出于时间关系你们写吧
         console.log(data.lst)
         __this.postItems = data.lst;
-        this.total = data.total_page;
-        console.log(this.total)
-        console.log(data.total_page)
+        //接收到post的总数量
+        this.total = data.total_post;
+        console.log(this.post)
       });
+      //传输页码的标志
+      this.socket.emit('Search Post Info', {
+        tags: this.$route.query.tags,
+        cur_page: this.page,
+      })
     }
   }
 })
