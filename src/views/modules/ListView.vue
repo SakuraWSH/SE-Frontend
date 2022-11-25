@@ -50,12 +50,12 @@
 
 <script setup>
 import NavBar from "../../components/NavBar.vue"
-import { io } from "https://cdn.socket.io/4.3.2/socket.io.esm.min.js";
 import { ref } from 'vue'
 const input1 = ref('')
 </script>
 
 <script>
+import axios from 'axios';
 // console.log(selectthing1)
 import { ElRow, ElCol, ElCard, ElDivider, ElButton, ElCascader, ElPagination, ElIcon, ElContainer, ElHeader, ElInput } from 'element-plus';
 import { defineComponent, reactive } from 'vue';
@@ -570,41 +570,57 @@ export default defineComponent({
   computed: {
     cards() {
       const cards = []
-      this.postItems.forEach((item, index) => {
-        const row = Math.floor(index / 5)
-        if (!cards[row]) {
-          cards[row] = []
-        }
-        cards[row].push(item)
-      })
+      if (this.postItems) {
+        this.postItems.forEach((item, index) => {
+          const row = Math.floor(index / 5)
+          if (!cards[row]) {
+            cards[row] = []
+          }
+          cards[row].push(item)
+        })
+      }
       return cards
     }
   },
   created(){
-    this.initWebSocket();
+    this.init();
   },
   methods: {
     search(){
       console.log(this.input1)
-      this.socket.emit('Search Post Info by Key Words', {
-        key_words : this.input1,
-      })
       const __this = this;
-      this.socket.on('post_info_response', function(data) {
-        console.log(data.lst)
-        __this.postItems = data.lst;
+      axios({
+        method: "get",
+        url: "/api/post/key-list",
+        params: {
+          key_words : this.input1
+        },
+      }).then(data => {
+        console.log(data.data.lst)
+        __this.postItems = data.data.lst;
         //接收到post的总数量
-        __this.total = data.total_post;
+        __this.total = data.data.total_post;
         console.log(this.total)
-      });
+      })
     },
     handleCurrentChange(val) {
       //传输页码的标志和翻页
       console.log(`当前页: ${val}`);
       this.page = val
-      this.socket.emit('Search Post Info', {
-        tags: this.$route.query.tags,
-        cur_page: this.page,
+      const __this = this;
+      axios({
+        method: "get",
+        url: "/api/post/list",
+        params: {
+          tags: this.$route.query.tags,
+          cur_page: this.page,
+        },
+      }).then(data => {
+        console.log(data.data.lst)
+        __this.postItems = data.data.lst;
+        //接收到post的总数量
+        __this.total = data.data.total_post;
+        console.log(this.total)
       })
     },
     goto(router) {
@@ -620,55 +636,53 @@ export default defineComponent({
       })
     },
     
-    initWebSocket(){
-      this.socket = io('127.0.0.1:5001/list');
-      this.socket.on("connect", () => {
-        console.log(this.socket.id); 
-        console.log(this.$route.query.tags);
-        if(this.$route.query.tags == 11){
-          this.selectthing1 = true;
-        }
-        if(this.$route.query.tags == 12){
-          this.selectthing2 = true;
-        }
-        if(this.$route.query.tags == 13){
-          this.selectthing3 = true;
-        }
-        if(this.$route.query.tags == 21){
-          this.selectthing4 = true;
-        }
-        if(this.$route.query.tags == 22){
-          this.selectthing5 = true;
-        }
-        if(this.$route.query.tags == 23){
-          this.selectthing6 = true;
-        }
-        if(this.$route.query.tags == 24){
-          this.selectthing7 = true;
-        }
-        if(this.$route.query.tags == 31){
-          this.selectthing8 = true;
-        }
-        if(this.$route.query.tags == 32){
-          this.selectthing9 = true;
-        }
-        if(this.$route.query.tags == 33){
-          this.selectthing10 = true;
-        }
-        console.log(this.selectthing1)
-        this.socket.emit('Search Post Info', {
-          tags: this.$route.query.tags,
-          cur_page: 1
-        })
-      });
+    init(){
+      if(this.$route.query.tags == 11){
+        this.selectthing1 = true;
+      }
+      if(this.$route.query.tags == 12){
+        this.selectthing2 = true;
+      }
+      if(this.$route.query.tags == 13){
+        this.selectthing3 = true;
+      }
+      if(this.$route.query.tags == 21){
+        this.selectthing4 = true;
+      }
+      if(this.$route.query.tags == 22){
+        this.selectthing5 = true;
+      }
+      if(this.$route.query.tags == 23){
+        this.selectthing6 = true;
+      }
+      if(this.$route.query.tags == 24){
+        this.selectthing7 = true;
+      }
+      if(this.$route.query.tags == 31){
+        this.selectthing8 = true;
+      }
+      if(this.$route.query.tags == 32){
+        this.selectthing9 = true;
+      }
+      if(this.$route.query.tags == 33){
+        this.selectthing10 = true;
+      }
+      console.log(this.selectthing1)
       const __this = this;
-      this.socket.on('post_info_response', function(data) {
+      axios({
+        method: "get",
+        url: "/api/post/list",
+        params: {
+          tags: this.$route.query.tags,
+          cur_page: 1,
+        },
+      }).then(data => {
         console.log(data.lst)
-        __this.postItems = data.lst;
+        __this.postItems = data.data.lst;
         //接收到post的总数量
-        __this.total = data.total_post;
+        __this.total = data.data.total_post;
         console.log(this.total)
-      });
+      })
     }
   }
 })
