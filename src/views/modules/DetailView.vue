@@ -45,10 +45,10 @@
 
 <script setup>
 import NavBar from "../../components/NavBar.vue"
-import { io } from "https://cdn.socket.io/4.3.2/socket.io.esm.min.js";
 </script>
 
 <script>
+import axios from 'axios'
 import { ElHeader, ElContainer, ElAside, ElButton, ElCarousel, ElCarouselItem, ElDivider, ElCol, ElRow } from 'element-plus';
 import { defineComponent, reactive } from 'vue';
 import '../../../node_modules/element-plus/theme-chalk/index.css'
@@ -78,25 +78,23 @@ export default defineComponent({
     }
   },
   created(){
-    this.initWebSocket();
+    this.init();
   },
   methods: {
     gotoPage(index) {
       this.currentIndex = index;
     },
-    initWebSocket(){
-      this.socket = io('127.0.0.1:5001/detail');
-      this.socket.on("connect", () => {
-        console.log(this.socket.id);
-        console.log(this.$route.query.pid);
-        this.socket.emit('Open Post Info', {
-          id: this.$route.query.pid,
-        })
-      });
+    init(){
       const __this = this;
-      this.socket.on('post_info_response',function(data) {
+      axios({
+        method: "get",
+        url: "/api/post/detail",
+        data: {
+          id: this.$route.query.pid,
+        },
+      }).then(data => {
         console.log(data);
-        __this.detailItems = data;
+        __this.detailItems = data.data;
       });
     }
   },

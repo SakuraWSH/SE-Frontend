@@ -88,7 +88,6 @@
 
 <script setup>
 import NavBar from "../../components/NavBar.vue"
-import { io } from "https://cdn.socket.io/4.3.2/socket.io.esm.min.js";
 </script>
 
 <script>
@@ -262,9 +261,6 @@ export default defineComponent({
       ],
     }
   },
-  created(){
-    this.initWebsocket();
-  },
   mounted() {
     this.selectTab();
   },
@@ -278,12 +274,6 @@ export default defineComponent({
       if(this.$route.query.tab != null){
         this.activeTab = this.$route.query.tab;
       }
-    },  
-    initWebsocket(){
-      this.socket = io('127.0.0.1:5001/user');
-      this.socket.on("connect",()=>{
-        console.log(this.socket.id); 
-      })
     }
   }
 

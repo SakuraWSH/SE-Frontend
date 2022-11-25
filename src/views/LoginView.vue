@@ -53,7 +53,6 @@ import { ElForm, ElFormItem, ElInput, ElButton, ElImage, ElCard } from 'element-
 import { defineComponent, reactive, ref } from 'vue';
 import { mapMutations } from 'vuex';
 import axios from 'axios';
-import { io } from "https://cdn.socket.io/4.3.2/socket.io.esm.min.js";
 import '../../node_modules/element-plus/theme-chalk/index.css'
 export default defineComponent({
   components: {
@@ -77,87 +76,6 @@ export default defineComponent({
   },
   methods: {
     ...mapMutations(["setEmail", "setUsername", "setToken", "setProfile", "setLogin"]),
-    initWebSocket() {
-      this.socket = io('127.0.0.1:5001/login');
-      this.socket.on("connect", () => {
-        console.log(this.socket.id);
-      });
-    },
-    __logIn() {
-      this.socket.emit('Login Info', {
-        email: this.email,
-        password: this.password
-      });
-      const __this = this;
-      this.socket.on('post_info_response', function (data) {
-        switch (data.login_code) {
-          case 0:
-            console.log("login success");
-            setLogin(true);
-            localStorage.setItem("Flag", "isLogin");
-            localStorage.setItem("Email", this.loginForm.email);
-            localStorage.setItem("Username", data.username);
-            localStorage.setItem("Profile", data.profile);
-            this.$router.replace('/home');
-            break;
-          case 1:
-            this.$message.error('账号不存在！');
-            this.loginForm.email = '';
-            this.loginForm.password = '';
-            break;
-          case 2:
-            this.$message.error('密码错误！');
-            this.loginForm.password = '';
-            break;
-          default:
-            this.$message.error(data.login_message);
-            console.log(data.login_code);
-            break;
-        }
-      });
-    },
-    __signUp() {
-      if (this.signupForm.password != this.signupForm.passwordComfirm) {
-        this.$message.error('两次密码不同，请重试！');
-        this.signupForm.password = '';
-        this.signupForm.passwordComfirm = '';
-        return;
-      }
-      this.socket.emit('Signup Info', {
-        username: this.username,
-        email: this.email,
-        password: this.password
-      });
-      const __this = this;
-      this.socket.on('post_info_response', function (data) {
-        switch (data.regist_code) {
-          case 0:
-            console.log("signup success");
-            setLogin(true);
-            localStorage.setItem("Flag", "isLogin");
-            localStorage.setItem("Email", this.signupForm.email);
-            localStorage.setItem("Username", this.signupForm.username);
-            localStorage.setItem("Profile", "/src/assets/images/default_profile.png");
-            this.$router.replace('/home');
-            break;
-
-          case -1:
-            this.$message.error("请填写完整信息！");
-            this.signupForm.password = "";
-            break;
-
-          case 1:
-            this.$message.error("该邮箱已被注册！");
-            this.signupForm.email = "";
-            this.signupForm.password = "";
-            this.signupForm.username = "";
-            break;
-
-          default:
-            break;
-        }
-      });
-    },
     logIn() {
       axios({
         method: "post",
@@ -207,7 +125,7 @@ export default defineComponent({
         data: {
           username: this.signupForm.username,
           email: this.signupForm.email,
-          password: this.signupForm.password,
+          password: this.signupForm.password
         },
       }).then(data => {
         switch (data.data.regist_code) {

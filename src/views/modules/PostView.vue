@@ -106,9 +106,7 @@
 import NavBar from "../../components/NavBar.vue"
 import Upload from "../../components/Upload.vue"
 import { ref } from 'vue'
-import { io } from "https://cdn.socket.io/4.3.2/socket.io.esm.min.js";
 import axios from 'axios';
-
 const input1 = ref('')
 const input2 = ref('')
 const input3 = ref('')
@@ -664,9 +662,6 @@ export default defineComponent({
       tempvalue: [],
     }
   },
-  created(){
-    this.initWebSocket();
-  },
   methods: {
     base64ImgtoFile(dataurl,filename = 'file'){
       let arr = dataurl.split(',')
@@ -713,28 +708,30 @@ export default defineComponent({
         console.log(response.data)//response.data就有返回的图片地址
       });
     }, 
-    initWebSocket(){
-      this.socket = io('127.0.0.1:5001/post');
-      this.socket.on("connect", () => {
-        console.log(this.socket.id); 
-      });
-    },
     post() {
       var tags = this.tempvalue[0];
       if (this.tempvalue.length > 1) {
         tags = this.tempvalue[1];
       }
-      console.log(this.imgList)
-      var base64Img = this.imgList[0];
-      var imgFile = this.base64ImgtoFile(base64Img);
-      this.imgFile.push(imgFile),
-      this.socket.emit('Add Post Info', {
-        headline: this.input1, 
-        tags: tags, 
-        price_and_number: this.input3,
-        info: this.input2, 
-        picture: "testPicture"}
-      );
+      if (this.imgList.length > 0) {
+        console.log(this.imgList)
+        var base64Img = this.imgList[0];
+        var imgFile = this.base64ImgtoFile(base64Img);
+        this.imgFile.push(imgFile);
+      }
+      axios({
+        method: "post",
+        url: "/api/post/add",
+        data: {
+          headline: this.input1, 
+          tags: tags, 
+          price_and_number: this.input3,
+          info: this.input2, 
+          picture: "testPicture"
+        },
+      }).then(data => {
+        console.log(data)
+      })
       // 这里还要个判断成不成功
       this.goto('/home')
     },
