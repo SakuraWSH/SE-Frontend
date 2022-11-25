@@ -12,7 +12,7 @@
     </div>
 </template>
 
-<style>
+<style scoped>
 .imgUpload {
     display: flex;
     flex-direction: row;
