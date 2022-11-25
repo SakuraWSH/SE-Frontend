@@ -831,7 +831,7 @@ export default defineComponent({
 })
 </script>
 
-<style>
+<style scoped>
 .el-container {
   height: 100%;
   width: 100%;
