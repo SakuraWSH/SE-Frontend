@@ -135,7 +135,8 @@ export default defineComponent({
                     localStorage.removeItem("Flag");
                     this.$router.replace('/');
                 } else {
-                    alert("登出失败！");
+                    console.log(response.data.logout_code);
+                    this.$message.error("登出失败！");
                 }
             });
         }
