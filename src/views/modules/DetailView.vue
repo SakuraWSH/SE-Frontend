@@ -28,7 +28,21 @@
       </div>
     </div>
     <div class="comment">
-      评论
+      <div style='font-family: "宋体" !important; font-size: 42px !important'>评论</div>
+      <el-input
+        type="textarea"
+        autosize
+        placeholder="请输入内容"
+        v-model="comment"
+      ></el-input>
+      <el-button shadow="hover" round class="sendButton" @click="sendComment()">发送</el-button>
+    </div>
+    <div class="commentItem" v-for="(cmt, index) of comments" :key="index">
+      <div>
+        <span>{{cmt.username}}</span>
+        <span style="color: gray; margin-left: 2em;">{{cmt.time}}</span>
+      </div>
+      <div>{{cmt.content}}</div>
     </div>
   </el-container>
 
@@ -40,7 +54,7 @@ import NavBar from "../../components/NavBar.vue"
 
 <script>
 import axios from 'axios'
-import { ElHeader, ElContainer, ElAside, ElButton, ElCarousel, ElCarouselItem, ElDivider, ElCol, ElRow } from 'element-plus';
+import { ElHeader, ElContainer, ElAside, ElButton, ElCarousel, ElCarouselItem, ElDivider, ElCol, ElRow, ElIcon } from 'element-plus';
 import { defineComponent, reactive } from 'vue';
 import '../../../node_modules/element-plus/theme-chalk/index.css'
 export default defineComponent({
@@ -54,6 +68,7 @@ export default defineComponent({
     ElDivider,
     ElCol,
     ElRow,
+    ElIcon
   },
 
   data() {
@@ -66,6 +81,8 @@ export default defineComponent({
         picture:'',
         price_and_number:'',
       }],
+      comment: '',
+      comments: []
     }
   },
   created(){
@@ -75,7 +92,7 @@ export default defineComponent({
     gotoPage(index) {
       this.currentIndex = index;
     },
-    init(){
+    init() {
       const __this = this;
       axios({
         method: "get",
@@ -86,6 +103,50 @@ export default defineComponent({
       }).then(data => {
         console.log(data);
         __this.detailItems = data.data;
+      });
+      this.fetchComments();
+    },
+    sendComment() {
+      if (this.comment.length == 0) {
+        this.$message({
+          message: '你好像什么都没输入哦？',
+          type: "warning"
+        })
+        return;
+      }
+      axios({
+        method: "post",
+        url: "/api/post/comment/add",
+        data: {
+          pid: this.$route.query.pid,
+          uid: localStorage.getItem("UID"),
+          content: this.comment
+        }
+      }).then(data => {
+        if (data.data.code == 0) {
+          this.$message('评论成功！')
+          this.fetchComments();
+        } else {
+          this.$message.error('评论失败qwq')
+        }
+      });
+      
+    },
+    fetchComments() {
+      const __this = this;
+      axios({
+        method: "get",
+        url: "/api/post/comment/get",
+        params: {
+          via: "post",
+          pid: this.$route.query.pid
+        }
+      }).then(data => {
+        if (data.data.code == 0) {
+          __this.comments = data.data.comments
+        } else {
+          this.$message.error('获取评论失败qwq')
+        }
       });
     }
   },
@@ -105,7 +166,7 @@ export default defineComponent({
       } else {
         return this.currentIndex + 1;
       }
-    }
+    },
   }
 })
 </script>
@@ -182,10 +243,17 @@ export default defineComponent({
 }
 
 .comment {
-  font-family: "宋体";
-  font-size: 45px;
+  margin-top: 4em;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-bottom: 2em;
 }
 
+.commentItem {
+  margin-bottom: 1em;
+  margin-left: 10%;
+  margin-right: 10%;
+}
 .el-carousel__item h3 {
   color: #475669;
   font-size: 14px;
@@ -205,5 +273,10 @@ export default defineComponent({
 .el-divider{
   margin: 0 0;
   background: 0 0;
+}
+
+.sendButton {
+  float: right;
+  margin-top: 1em;
 }
 </style>

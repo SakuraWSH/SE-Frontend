@@ -125,7 +125,8 @@ export default defineComponent({
         data: {
           username: this.signupForm.username,
           email: this.signupForm.email,
-          password: this.signupForm.password
+          password: this.signupForm.password,
+          captcha_skip: true
         },
       }).then(data => {
         switch (data.data.regist_code) {
