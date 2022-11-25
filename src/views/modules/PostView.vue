@@ -79,7 +79,7 @@
           <Plus />
         </el-icon>
       </label>
-      <input type="file" accept="image/jpeg/*" @change="getPicture($event)" id="upload" />
+      <input type="file" accept="image/jpeg/*" @change="uploadImage()" id="upload" />
     </div>
     <div class style="font-family: 'Times New Roman', Times, serif;text-align: center;">具体描述</div>
     <el-input style="left:20%; width:60%;height:20%;" v-model="input2" />
@@ -97,6 +97,8 @@
     input1:{{ input1 }}
     input2:{{ input2 }}
     input3:{{ input3 }}
+    <!-- imglist:{{ imgList }} -->
+    <!-- imgFile:{{ imgFile }} -->
   </el-container>
 </template>
 
@@ -111,6 +113,7 @@ const input1 = ref('')
 const input2 = ref('')
 const input3 = ref('')
 const imgList = reactive([]);
+const imgFile = reactive([])
 </script>
 
 <script>
@@ -665,12 +668,27 @@ export default defineComponent({
     this.initWebSocket();
   },
   methods: {
+    base64ImgtoFile(dataurl,filename = 'file'){
+      let arr = dataurl.split(',')
+      let mime = arr[0].match(/:(.*?);/)[1]
+      let suffix = mime.split('/')[1]
+      let bstr = atob(arr[1])
+      let n = bstr.length
+      let u8arr = new Uint8Array(n)
+      while (n--) {
+        u8arr[n] = bstr.charCodeAt(n)
+      }
+      return new File([u8arr], `${filename}.${suffix}`, {
+        type: mime
+      })
+    },
     uploadImage() {
       const file = document.querySelector('input[type=file]').files[0];
       const reader = new FileReader();
 
       reader.onloadend = () => {
         this.imgList.push(reader.result);
+        this.imgFile.push(this.base64ImgtoFile(reader.result));
       }
       reader.readAsDataURL(file);
     },
@@ -706,6 +724,10 @@ export default defineComponent({
       if (this.tempvalue.length > 1) {
         tags = this.tempvalue[1];
       }
+      console.log(this.imgList)
+      var base64Img = this.imgList[0];
+      var imgFile = this.base64ImgtoFile(base64Img);
+      this.imgFile.push(imgFile),
       this.socket.emit('Add Post Info', {
         headline: this.input1, 
         tags: tags, 
