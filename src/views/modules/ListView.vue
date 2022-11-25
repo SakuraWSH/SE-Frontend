@@ -583,8 +583,13 @@ export default defineComponent({
   },
   methods: {
     handleCurrentChange(val) {
+      //传输页码的标志和翻页
       console.log(`当前页: ${val}`);
       this.page = val
+      this.socket.emit('Search Post Info', {
+        tags: this.$route.query.tags,
+        cur_page: this.page,
+      })
     },
     goto(router) {
       this.$router.replace(router);
@@ -645,14 +650,9 @@ export default defineComponent({
         console.log(data.lst)
         __this.postItems = data.lst;
         //接收到post的总数量
-        this.total = data.total_post;
-        console.log(this.post)
+        __this.total = data.total_post;
+        console.log(this.total)
       });
-      //传输页码的标志
-      this.socket.emit('Search Post Info', {
-        tags: this.$route.query.tags,
-        cur_page: this.page,
-      })
     }
   }
 })
