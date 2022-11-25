@@ -175,6 +175,7 @@ export default defineComponent({
             localStorage.setItem("Email", this.loginForm.email);
             localStorage.setItem("Username", data.data.username);
             // localStorage.setItem("Profile", data.profile);
+            localStorage.setItem("UID", data.data.userid);
             localStorage.setItem("Profile", "/src/assets/images/default_profile.png");
             this.$router.replace('/home');
             break;
@@ -215,6 +216,7 @@ export default defineComponent({
             localStorage.setItem("Flag", "isLogin");
             localStorage.setItem("Email", this.signupForm.email);
             localStorage.setItem("Username", this.signupForm.username);
+            localStorage.setItem("UID", data.data.userid);
             localStorage.setItem("Profile", "/src/assets/images/default_profile.png");
             this.$router.replace('/home');
             break;
