@@ -18,15 +18,6 @@
         <el-divider></el-divider>
         <div class="ps">
           {{ detailItems.info }}
-          <!-- 这里是描述<br />
-          这里是描述<br />
-          这里是描述<br />
-          这里是描述<br />
-          这里是描述<br />
-          这里是描述<br />
-          这里是描述<br />
-          这里是描述<br />
-          这里是描述 -->
         </div>
         <div class="price">{{detailItems.price_and_number}}</div>
         <el-row>
@@ -89,8 +80,8 @@ export default defineComponent({
       axios({
         method: "get",
         url: "/api/post/detail",
-        data: {
-          id: this.$route.query.pid,
+        params: {
+          id: __this.$route.query.pid,
         },
       }).then(data => {
         console.log(data);
