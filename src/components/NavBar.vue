@@ -128,10 +128,10 @@ export default defineComponent({
                 method: "post",
                 url: "/api/logout/",
                 data: {
-                    logout: 'True',
+                    logout: true,
                 },
             }).then(response => {
-                if (response.data.logout_code == '1') {
+                if (response.data.logout_code == 1) {
                     localStorage.removeItem("Flag");
                     this.$router.replace('/');
                 } else {

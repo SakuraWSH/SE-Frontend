@@ -159,11 +159,6 @@ export default defineComponent({
       });
     },
     logIn() {
-      // for development
-      // localStorage.setItem("Flag", "isLogin");
-      // this.$router.replace('/home');
-      // return;
-
       axios({
         method: "post",
         url: "/api/login/",
@@ -174,7 +169,7 @@ export default defineComponent({
       }).then(data => {
         console.log(data);
         switch (data.data.login_code) {
-          case '0':
+          case 0:
             console.log("login success");
             localStorage.setItem("Flag", "isLogin");
             localStorage.setItem("Email", this.loginForm.email);
@@ -183,17 +178,17 @@ export default defineComponent({
             localStorage.setItem("Profile", "/src/assets/images/default_profile.png");
             this.$router.replace('/home');
             break;
-          case '-1':
+          case -1:
             this.$message.error('请输入完整的邮箱与密码信息！');
             this.loginForm.email = '';
             this.loginForm.password = '';
             break;
-          case '1':
+          case 1:
             this.$message.error('账号不存在！');
             this.loginForm.email = '';
             this.loginForm.password = '';
             break;
-          case '2':
+          case 2:
             this.$message.error('密码错误！');
             this.loginForm.password = '';
             break;
@@ -215,7 +210,7 @@ export default defineComponent({
         },
       }).then(data => {
         switch (data.data.regist_code) {
-          case '0':
+          case 0:
             console.log("signup success");
             localStorage.setItem("Flag", "isLogin");
             localStorage.setItem("Email", this.signupForm.email);
@@ -224,19 +219,19 @@ export default defineComponent({
             this.$router.replace('/home');
             break;
 
-          case '-1':
+          case -1:
             this.$message.error("请填写完整信息！");
             this.signupForm.password = "";
             break;
 
-          case '1':
+          case 1:
             this.$message.error("该邮箱已被注册！");
             this.signupForm.email = "";
             this.signupForm.password = "";
             this.signupForm.username = "";
             break;
 
-          case '2':
+          case 2:
             this.$message.error("该邮箱无注册权限，请使用PKU邮箱！");
             this.signupForm.email = "";
             this.signupForm.password = "";
