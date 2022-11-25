@@ -3,7 +3,7 @@
     <el-header>
       <NavBar />
     </el-header>
-    <el-input size="large" class="w-50 m-2" placeholder="搜索" style="width:40%;left:30%;top:2%;" @keyup.enter="search()">
+    <el-input v-model = "input1" size="large" class="w-50 m-2" placeholder="搜索" style="width:40%;left:30%;top:2%;" @keyup.enter="search()">
     </el-input>
     <el-cascader style="top:4%;width:20%;left:40%;" v-if = "selectthing1" v-model="tempvalue" :options="options1" :show-all-levels='true' />
     <el-cascader style="top:4%;width:20%;left:40%;" v-if = "selectthing2" v-model="tempvalue" :options="options2" :show-all-levels='true' />
@@ -51,6 +51,8 @@
 <script setup>
 import NavBar from "../../components/NavBar.vue"
 import { io } from "https://cdn.socket.io/4.3.2/socket.io.esm.min.js";
+import { ref } from 'vue'
+const input1 = ref('')
 </script>
 
 <script>
@@ -582,6 +584,20 @@ export default defineComponent({
     this.initWebSocket();
   },
   methods: {
+    search(){
+      console.log(this.input1)
+      this.socket.emit('Search Post Info by Key Words', {
+        key_words : this.input1,
+      })
+      const __this = this;
+      this.socket.on('post_info_response', function(data) {
+        console.log(data.lst)
+        __this.postItems = data.lst;
+        //接收到post的总数量
+        __this.total = data.total_post;
+        console.log(this.total)
+      });
+    },
     handleCurrentChange(val) {
       //传输页码的标志和翻页
       console.log(`当前页: ${val}`);
