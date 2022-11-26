@@ -14,7 +14,7 @@
           </div>
           <div style="margin: 20px 0" />
           <div>
-            我的名字
+            {{User_name}}
           </div>
           <div style="margin: 20px 0" />
           <div>
@@ -35,7 +35,9 @@
               详细信息
             </el-button>
             <el-drawer v-model="drawer" title="I am the title" :with-header="false">
-              <span>邮箱等详细信息!</span>
+              <span>
+                {{Email}}
+              </span>
             </el-drawer>
           </div>
           </el-tab-pane>
@@ -127,6 +129,8 @@ export default defineComponent({
   },
   data(){
     return{
+      User_name:"我的姓名",
+      Email:"邮箱等其他信息",
       tabPosition: ref('left'),
       textarea: ref(''),
       drawer: ref(false),
@@ -272,17 +276,24 @@ export default defineComponent({
         this.activeTab = this.$route.query.tab;
       }
     },
-    init()  //收取头像图片、姓名、签名、邮箱、发布内容数组
+    init()  
+    /*收取头像图片:
+      姓名：User_name
+      签名
+      邮箱：Email
+      发布内容的数组：tableData
+    */
     {
       const __this = this;
       axios({
         method: "get",
         url: "/api/post/user",  //?
-       /* params: {
-          tags: this.$route.query.tags,
+       params: {
+          /*tags: this.$route.query.tags,
           cur_page: 1,
+          */
         },
-        */
+        
       }).then(data => {
 
       })
