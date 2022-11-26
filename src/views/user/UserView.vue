@@ -255,6 +255,9 @@ export default defineComponent({
       ],
     }
   },
+  created(){
+    this.init();
+  },
   mounted() {
     this.selectTab();
   },
@@ -268,6 +271,21 @@ export default defineComponent({
       if(this.$route.query.tab != null){
         this.activeTab = this.$route.query.tab;
       }
+    },
+    init()  //收取头像图片、姓名、签名、邮箱、发布内容数组
+    {
+      const __this = this;
+      axios({
+        method: "get",
+        url: "/api/post/user",  //?
+       /* params: {
+          tags: this.$route.query.tags,
+          cur_page: 1,
+        },
+        */
+      }).then(data => {
+
+      })
     }
   }
 
