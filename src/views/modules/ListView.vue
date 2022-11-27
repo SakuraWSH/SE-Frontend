@@ -655,6 +655,23 @@ export default defineComponent({
     },
     
     init(){
+      if(this.$route.query.key){
+        console.log(key);
+        const __this = this;
+        axios({
+          method: "get",
+          url: "/api/post/key-list",
+          params: {
+            key_words : key
+          },
+        }).then(data => {
+          console.log(data.data.lst)
+          __this.postItems = data.data.lst;
+          //接收到post的总数量
+          __this.total = data.data.total_post;
+          console.log(this.total)
+        })
+      }
       if(this.$route.query.tags == 11){
         this.selectthing1 = true;
       }
