@@ -48,6 +48,20 @@
 </template>
 
 
+<script setup>
+const loginForm = reactive({
+  email: '',
+  password: '',
+})
+const signupForm = reactive({
+  username: '',
+  email: '',
+  password: '',
+  passwordComfirm: '',
+})
+</script>
+
+
 <script>
 import { ElForm, ElFormItem, ElInput, ElButton, ElImage, ElCard } from 'element-plus';
 import { defineComponent, reactive, ref } from 'vue';
@@ -165,20 +179,6 @@ export default defineComponent({
       });
     },
   }
-})
-</script>
-
-
-<script setup>
-const loginForm = reactive({
-  email: '',
-  password: '',
-})
-const signupForm = reactive({
-  username: '',
-  email: '',
-  password: '',
-  passwordComfirm: '',
 })
 </script>
 
