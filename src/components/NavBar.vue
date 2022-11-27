@@ -121,7 +121,7 @@ export default defineComponent({
         },
         search() {
             console.log(this.keyword.keyword);
-            this.$router.replace('/list');
+            this.$router.replace('/list?key=' + this.keyword.keyword);
         },
         logout() {
             axios({
