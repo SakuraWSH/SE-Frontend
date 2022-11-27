@@ -5,17 +5,17 @@
     </el-header>
     <el-input v-model = "input1" size="large" class="w-50 m-2" placeholder="搜索" style="width:40%;left:30%;top:2%;" @keyup.enter="search()">
     </el-input>
-    <el-cascader style="top:4%;width:20%;left:40%;" v-if = "selectthing1" v-model="tempvalue" :options="options1" :show-all-levels='true' />
-    <el-cascader style="top:4%;width:20%;left:40%;" v-if = "selectthing2" v-model="tempvalue" :options="options2" :show-all-levels='true' />
-    <el-cascader style="top:4%;width:20%;left:40%;" v-if = "selectthing3" v-model="tempvalue" :options="options3" :show-all-levels='true' />
-    <el-cascader style="top:4%;width:20%;left:40%;" v-if = "selectthing4" v-model="tempvalue" :options="options4" :show-all-levels='true' />
-    <el-cascader style="top:4%;width:20%;left:40%;" v-if = "selectthing5" v-model="tempvalue" :options="options5" :show-all-levels='true' />
-    <el-cascader style="top:4%;width:20%;left:40%;" v-if = "selectthing6" v-model="tempvalue" :options="options6" :show-all-levels='true' />
-    <el-cascader style="top:4%;width:20%;left:40%;" v-if = "selectthing7" v-model="tempvalue" :options="options7" :show-all-levels='true' />
-    <el-cascader style="top:4%;width:20%;left:40%;" v-if = "selectthing8" v-model="tempvalue" :options="options8" :show-all-levels='true' />
-    <el-cascader style="top:4%;width:20%;left:40%;" v-if = "selectthing9" v-model="tempvalue" :options="options9" :show-all-levels='true' />
-    <el-cascader style="top:4%;width:20%;left:40%;" v-if = "selectthing10" v-model="tempvalue" :options="options10" :show-all-levels='true' />
-    <el-cascader style="top:4%;width:20%;left:40%;" v-if = "selectthing11" v-model="tempvalue" :options="options11" :show-all-levels='true' />
+    <el-cascader style="top:4%;width:20%;left:40%;" v-if = "selectthing1" v-model="postTags" :options="options1" :show-all-levels='true' @change="label()"/>
+    <el-cascader style="top:4%;width:20%;left:40%;" v-if = "selectthing2" v-model="postTags" :options="options2" :show-all-levels='true' @change="label()"/>
+    <el-cascader style="top:4%;width:20%;left:40%;" v-if = "selectthing3" v-model="postTags" :options="options3" :show-all-levels='true' @change="label()"/>
+    <el-cascader style="top:4%;width:20%;left:40%;" v-if = "selectthing4" v-model="postTags" :options="options4" :show-all-levels='true' @change="label()"/>
+    <el-cascader style="top:4%;width:20%;left:40%;" v-if = "selectthing5" v-model="postTags" :options="options5" :show-all-levels='true' @change="label()"/>
+    <el-cascader style="top:4%;width:20%;left:40%;" v-if = "selectthing6" v-model="postTags" :options="options6" :show-all-levels='true' @change="label()"/>
+    <el-cascader style="top:4%;width:20%;left:40%;" v-if = "selectthing7" v-model="postTags" :options="options7" :show-all-levels='true' @change="label()"/>
+    <el-cascader style="top:4%;width:20%;left:40%;" v-if = "selectthing8" v-model="postTags" :options="options8" :show-all-levels='true' @change="label()"/>
+    <el-cascader style="top:4%;width:20%;left:40%;" v-if = "selectthing9" v-model="postTags" :options="options9" :show-all-levels='true' @change="label()"/>
+    <el-cascader style="top:4%;width:20%;left:40%;" v-if = "selectthing10" v-model="postTags" :options="options10" :show-all-levels='true' @change="label()"/>
+    <el-cascader style="top:4%;width:20%;left:40%;" v-if = "selectthing11" v-model="postTags" :options="options11" :show-all-levels='true' @change="label()"/>
     <div class="father" style="top:8%;">
       <el-row v-for="(cardRow, index) of cards" :key="index" >
         <el-col :span="4" v-for="(item, cardCol) of cardRow" :key="item.post_id" :offset="cardCol > 0 ? 0 : 2">
@@ -545,6 +545,7 @@ export default defineComponent({
           value: '333',
         }
       ],
+      postTags: '',
       postItems: [
         {
           post_id: 1,
@@ -586,6 +587,23 @@ export default defineComponent({
     this.init();
   },
   methods: {
+    label(){
+      console.log(this.postTags)
+      const __this = this;
+      axios({
+        method: "get",
+        url: "/api/post/tags",
+        params:{
+          tags : this.postTags
+        },
+      }).then(data => {
+        console.log(data.data.lst)
+        __this.postItems = data.data.lst;
+        //接收到post的总数量
+        __this.total = data.data.total_post;
+        console.log(this.total)
+      })
+    },
     search(){
       console.log(this.input1)
       const __this = this;
