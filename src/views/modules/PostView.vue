@@ -135,7 +135,7 @@ export default defineComponent({
       return false;
     },
     post() {
-      if (this.postTags.length < 4) {
+      if (this.postTags.length < 2) {
         this.$message({message: '请选择完整的分类！', type: 'warning'});
         return
       }
@@ -151,7 +151,7 @@ export default defineComponent({
         data: {
           user_id: localStorage.getItem("UID"),
           headline: this.input1, 
-          tags: this.postTags[3], 
+          tags: this.postTags, 
           price_and_number: this.input3,
           info: this.input2, 
           picture: "testPicture"
