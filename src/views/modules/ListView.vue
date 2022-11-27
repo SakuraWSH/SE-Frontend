@@ -592,9 +592,10 @@ export default defineComponent({
       const __this = this;
       axios({
         method: "get",
-        url: "/api/post/tags",
+        url: "/api/post/list",
         params:{
-          tags : this.postTags
+          tags : this.postTags,
+          cur_page: 1,
         },
       }).then(data => {
         console.log(data.data.lst)
@@ -611,7 +612,8 @@ export default defineComponent({
         method: "get",
         url: "/api/post/key-list",
         params: {
-          key_words : this.input1
+          key_words : this.input1,
+          cur_page: 1,
         },
       }).then(data => {
         console.log(data.data.lst)
@@ -662,7 +664,8 @@ export default defineComponent({
           method: "get",
           url: "/api/post/key-list",
           params: {
-            key_words : key
+            key_words : key,
+            cur_page: 1,
           },
         }).then(data => {
           console.log(data.data.lst)
