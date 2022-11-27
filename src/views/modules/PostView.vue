@@ -149,6 +149,7 @@ export default defineComponent({
         method: "post",
         url: "/api/post/add",
         data: {
+          user_id: localStorage.getItem("UID"),
           headline: this.input1, 
           tags: this.postTags[3], 
           price_and_number: this.input3,
