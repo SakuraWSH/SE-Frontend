@@ -55,10 +55,14 @@
             <el-table :data="tableData" style="width: 100%" height="500">
               <el-table-column fixed prop="date" label="日期" width="150" />
               <el-table-column prop="time" label="时间" width="120" />
-              <el-table-column prop="title" label="标题" width="200" />
-              <el-table-column prop="city" label="分组" width="200" />
-              <el-table-column prop="state" label="状态" width="200" />
-              <el-table-column prop="zip" label="编号" width="120" />
+              <el-table-column prop="title" label="标题" width="200"/>
+              <el-table-column prop="tags" label="分组" width="100" />
+              <el-table-column label="操作" >
+                <template v-slot="scope">
+                  <el-button type="text" size="small" @click="goto_Detail(scope.row.post_id)">详情</el-button>
+                  <el-button type="text" size="small" @click="delete_post(scope.row.post_id)">删除</el-button>
+                </template>
+              </el-table-column>
             </el-table>
           </el-tab-pane>
 
@@ -93,6 +97,7 @@ import NavBar from "../../components/NavBar.vue"
 </script>
 
 <script>
+import axios from "axios"
 import { ref, reactive,toRefs, defineComponent } from 'vue'
 import { ElCol, ElRow, ElCard, ElDivider, ElCascader, ElPagination, ElIcon, ElContainer, ElHeader, ElInput, ElButton, ElMain, ElAside, ElTable, ElTabs, ElTabPane, ElTableColumn, ElDrawer } from 'element-plus';
 import {
@@ -137,64 +142,12 @@ export default defineComponent({
       currentDate: ref(new Date()),
       circleUrl: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
       activeTab: 'info',
-      tableData : [
-  {
-    date: '2022-11-01',
-    time:'20:30',
-    title: '一起学习软件工程',
-    state: '审核中',
-    city: '课程攻略',
-    zip: 'KC 101',
-  },
-  {
-    date: '2022-10-30',
-    time:'19:30',
-    title: '水一水热度',
-    state: '已发布',
-    city: '吐槽专区',
-    zip: 'TC 203',
-  },
-  {
-    date: '2022-10-30',
-    time:'16:00',
-    title: '一起来看S赛',
-    state: '已发布',
-    city: '吐槽专区',
-    zip: 'TC 189',
-  },
-  {
-    date: '2022-10-25',
-    time:'10:07',
-    title: '出二手无线鼠标~',
-    state: '已发布',
-    city: '日用物品',
-    zip: 'RY 463',
-  },
-  {
-    date: '2022-10-24',
-    time:'14:30',
-    title: '午睡起来还是好困',
-    state: '已发布',
-    city: '吐槽专区',
-    zip: 'TC 52',
-  },
-  {
-    date: '2022-10-23',
-    time:'10:30',
-    title: '出专业课程书了',
-    state: '已发布',
-    city: '书籍专区',
-    zip: 'SJ 34',
-  },
-  {
-    date: '2022-10-20',
-    time:'22:30',
-    title: '我来做第一条',
-    state: '已发布',
-    city: '吐槽专区',
-    zip: 'TC 1',
-  },
-      ],
+      tableData : [{
+        date: '2022-11-01',
+        time:'20:30',
+        title: '一起学习软件工程',
+        tags: '11',
+      }],
       friendData : [
   {
     name: 'clem1',
@@ -287,15 +240,54 @@ export default defineComponent({
       const __this = this;
       axios({
         method: "get",
-        url: "/api/post/user",  //?
+        url: "/api/user/",  //?
        params: {
-          /*tags: this.$route.query.tags,
-          cur_page: 1,
-          */
+          uid: localStorage.getItem("UID")
         },
         
       }).then(data => {
-
+        __this.User_name = data.data.name,
+        __this.email = data.data.Email
+      })
+      this.get_posts()
+    },
+    get_posts() {
+      const __this = this;
+      axios({
+        method: "post",
+        url: "/api/post/user_post",  //?
+        data: {
+          user_id: localStorage.getItem("UID"),
+          cur_page: 1
+        },
+        
+      }).then(data => {
+        __this.tableData = data.data.lst
+      })
+    },
+    goto_Detail(pid){
+      this.$router.push({
+        path: 'detail',
+        query: {
+          pid: pid
+        }
+      })
+    },
+    delete_post(pid) {
+      const __this = this;
+      axios({
+        method: "post",
+        url: "/api/post/delete",  //?
+        data: {
+          id: pid,
+        },
+      }).then(data => {
+        if(data.data.code == 0) {
+          this.$message("删除成功！")
+          this.get_posts()
+        } else {
+          this.$message.error("删除失败！")
+        }
       })
     }
   }
