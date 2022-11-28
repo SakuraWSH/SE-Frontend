@@ -82,12 +82,6 @@ export default defineComponent({
   data() {
     return {
       login: 1,
-      user: {
-        email: '',
-        username: '',
-        token: '',
-        profile: '',
-      },
       loginForm: reactive({
         email: '',
         password: '',

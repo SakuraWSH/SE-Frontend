@@ -102,7 +102,7 @@
 import { ElRow, ElCol, ElDropdown, ElDropdownMenu, ElDropdownItem, ElIcon, ElInput } from 'element-plus';
 import { defineComponent, reactive } from 'vue';
 import { mapMutations } from 'vuex';
-import user from '../stores/user';
+import axios from 'axios';
 import '../../node_modules/element-plus/theme-chalk/index.css'
 export default defineComponent({
     components: {
@@ -113,6 +113,15 @@ export default defineComponent({
         ElDropdownItem,
         ElIcon,
         ElInput,
+    },
+    data() {
+        return {
+            keyword: reactive({
+                keyword: '',
+            }),
+            username: localStorage.getItem("Username"),
+            profile: localStorage.getItem("Profile"),
+        }
     },
     methods: {
         ...mapMutations(["setEmail", "setUsername", "setToken", "setProfile"]),
@@ -142,15 +151,6 @@ export default defineComponent({
         }
     }
 })
-</script>
-
-<script setup>
-import axios from 'axios';
-const keyword = reactive({
-    keyword: '',
-})
-const username = localStorage.getItem("Username");
-const profile = localStorage.getItem("Profile");
 </script>
 
 
