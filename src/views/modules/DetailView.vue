@@ -60,7 +60,6 @@ import NavBar from "../components/NavBar.vue"
 import axios from 'axios'
 import { ElHeader, ElContainer, ElAside, ElButton, ElCarousel, ElCarouselItem, ElDivider, ElCol, ElRow, ElIcon } from 'element-plus';
 import { defineComponent, reactive } from 'vue';
-import NavBar from "../../components/NavBar.vue"
 import '../../../node_modules/element-plus/theme-chalk/index.css'
 export default defineComponent({
   components: {
