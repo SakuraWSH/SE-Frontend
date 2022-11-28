@@ -40,7 +40,7 @@
   </el-container>
 </template>
 
-<script setup>
+<!-- <script setup>
 import NavBar from "../../components/NavBar.vue"
 import Upload from "../../components/Upload.vue"
 import { ref } from 'vue'
@@ -49,13 +49,17 @@ const input1 = ref('')
 const input2 = ref('')
 const input3 = ref('')
 const imgList = reactive([]);
-const imgFile = reactive([])
-</script>
+const imgFile = reactive([]);
+</script> -->
 
 <script>
 import { ElRow, ElCol, ElCard, ElDivider, ElButton, ElHeader, ElContainer, ElAside, ElInput, ElCascader, ElIcon, ElSelect, ElOption } from 'element-plus';
 import { defineComponent, reactive } from 'vue';
 import '../../../node_modules/element-plus/theme-chalk/index.css';
+import NavBar from "../../components/NavBar.vue"
+import Upload from "../../components/Upload.vue"
+import { ref } from 'vue'
+import axios from 'axios';
 export default defineComponent({
   components: {
     ElCol,
@@ -230,8 +234,15 @@ label: '光华管理学院', }, { value: '3243', label: '元培学院', }, { val
 [ { label: '食堂', value: '331', }, { label: '咖啡厅', value: '332', }, { label:
 '景点', value: '333', } ] }, { value: '34', label: '吐槽专区', }] }
 ],
-      postTags: ''
+      postTags: '',
+      input1 : ref(''),
+      input2 : ref(''),
+      input3 : ref(''),
+      imgList : reactive([]),
+      imgFile : reactive([]),
     } 
+    
+
   }
 })
 </script>
