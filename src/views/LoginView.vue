@@ -181,6 +181,13 @@ export default defineComponent({
             this.signupForm.username = "";
             break;
 
+          case 4:
+            this.$message.error("用户名已被注册！")
+            this.signupForm.email = "";
+            this.signupForm.password = "";
+            this.signupForm.username = "";
+            break;
+
           default:
             break;
         }
