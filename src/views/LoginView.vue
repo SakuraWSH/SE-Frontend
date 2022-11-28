@@ -4,6 +4,7 @@
     <div class="login-block login" v-if="login == 1">
       <img src="/src/assets/images/logo.png" alt="logo" class="login-logo" />
       <el-form :model="loginForm" class="login-form">
+        <!-- <el-form class="login-form"> -->
         <el-form-item class="login-input">
           <!-- <el-input v-model="form.name" /> -->
           <el-input v-model="loginForm.email" size="large" placeholder="邮箱/Email" />
@@ -48,18 +49,18 @@
 </template>
 
 
-<script setup>
-const loginForm = reactive({
-  email: '',
-  password: '',
-})
-const signupForm = reactive({
-  username: '',
-  email: '',
-  password: '',
-  passwordComfirm: '',
-})
-</script>
+<!-- <script setup> -->
+// const loginForm = reactive({
+//   email: '',
+//   password: '',
+// });
+// const signupForm = reactive({
+//   username: '',
+//   email: '',
+//   password: '',
+//   passwordComfirm: '',
+// });
+<!-- </script> -->
 
 
 <script>
@@ -68,6 +69,7 @@ import { defineComponent, reactive, ref } from 'vue';
 import { mapMutations } from 'vuex';
 import axios from 'axios';
 import '../../node_modules/element-plus/theme-chalk/index.css'
+
 export default defineComponent({
   components: {
     ElForm,
@@ -86,11 +88,23 @@ export default defineComponent({
         token: '',
         profile: '',
       },
+      loginForm: reactive({
+        email: '',
+        password: '',
+      }),
+      signupForm: reactive({
+        username: '',
+        email: '',
+        password: '',
+        passwordComfirm: '',
+      }),
     }
   },
   methods: {
     ...mapMutations(["setEmail", "setUsername", "setToken", "setProfile", "setLogin"]),
     logIn() {
+      // console.log(this);
+      // console.log(this.loginForm);
       axios({
         method: "post",
         url: "/api/login/",
