@@ -104,7 +104,7 @@ export default defineComponent({
     ...mapMutations(["setEmail", "setUsername", "setToken", "setProfile", "setLogin"]),
     logIn() {
       // console.log(this);
-      // console.log(this.loginForm);
+      console.log(this.loginForm);
       axios({
         method: "post",
         url: "/api/login/",
