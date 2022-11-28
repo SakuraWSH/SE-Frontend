@@ -52,6 +52,10 @@
 import NavBar from "../../components/NavBar.vue"
 </script> -->
 
+<script setup>
+import NavBar from "../components/NavBar.vue"
+</script>
+
 <script>
 import axios from 'axios'
 import { ElHeader, ElContainer, ElAside, ElButton, ElCarousel, ElCarouselItem, ElDivider, ElCol, ElRow, ElIcon } from 'element-plus';
