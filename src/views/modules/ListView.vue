@@ -54,6 +54,10 @@ import { ref } from 'vue'
 const input1 = ref('')
 </script> -->
 
+<script setup>
+import NavBar from "../components/NavBar.vue"
+</script>
+
 <script>
 import axios from 'axios';
 // console.log(selectthing1)
