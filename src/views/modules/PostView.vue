@@ -60,7 +60,6 @@ const imgFile = reactive([]);
 import { ElRow, ElCol, ElCard, ElDivider, ElButton, ElHeader, ElContainer, ElAside, ElInput, ElCascader, ElIcon, ElSelect, ElOption } from 'element-plus';
 import { defineComponent, reactive } from 'vue';
 import '../../../node_modules/element-plus/theme-chalk/index.css';
-import NavBar from "../../components/NavBar.vue"
 import Upload from "../../components/Upload.vue"
 import { ref } from 'vue'
 import axios from 'axios';

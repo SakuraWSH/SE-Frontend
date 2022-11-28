@@ -64,7 +64,6 @@ import axios from 'axios';
 import { ElRow, ElCol, ElCard, ElDivider, ElButton, ElCascader, ElPagination, ElIcon, ElContainer, ElHeader, ElInput } from 'element-plus';
 import { defineComponent, reactive } from 'vue';
 import '../../../node_modules/element-plus/theme-chalk/index.css';
-import NavBar from "../../components/NavBar.vue"
 import { ref } from 'vue'
 export default defineComponent({
   components: {
