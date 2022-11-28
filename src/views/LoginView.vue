@@ -82,12 +82,6 @@ export default defineComponent({
   data() {
     return {
       login: 1,
-      user: {
-        email: '',
-        username: '',
-        token: '',
-        profile: '',
-      },
       loginForm: reactive({
         email: '',
         password: '',
@@ -104,7 +98,7 @@ export default defineComponent({
     ...mapMutations(["setEmail", "setUsername", "setToken", "setProfile", "setLogin"]),
     logIn() {
       // console.log(this);
-      console.log(this.loginForm);
+      // console.log(this.loginForm);
       axios({
         method: "post",
         url: "/api/login/",
