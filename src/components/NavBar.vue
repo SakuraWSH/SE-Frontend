@@ -26,9 +26,9 @@
                     </span>
                     <template #dropdown>
                         <el-dropdown-menu>
-                            <el-dropdown-item @click="goto('/list')">课程资料</el-dropdown-item>
-                            <el-dropdown-item @click="goto('/list')">书籍专区</el-dropdown-item>
-                            <el-dropdown-item @click="goto('/list')">日用物品</el-dropdown-item>
+                            <el-dropdown-item @click="goto('/list?tags=11')">课程资料</el-dropdown-item>
+                            <el-dropdown-item @click="goto('/list?tags=12')">书籍专区</el-dropdown-item>
+                            <el-dropdown-item @click="goto('/list?tags=13')">日用物品</el-dropdown-item>
                         </el-dropdown-menu>
                     </template>
                 </el-dropdown>
@@ -42,10 +42,10 @@
                     </span>
                     <template #dropdown>
                         <el-dropdown-menu>
-                            <el-dropdown-item @click="goto('/list')">课程组队</el-dropdown-item>
-                            <el-dropdown-item @click="goto('/list')">活动约人</el-dropdown-item>
-                            <el-dropdown-item @click="goto('/list')">寻找伴侣</el-dropdown-item>
-                            <el-dropdown-item @click="goto('/list')">招聘信息</el-dropdown-item>
+                            <el-dropdown-item @click="goto('/list?tags=21')">课程组队</el-dropdown-item>
+                            <el-dropdown-item @click="goto('/list?tags=22')">活动约人</el-dropdown-item>
+                            <el-dropdown-item @click="goto('/list?tags=23')">寻找伴侣</el-dropdown-item>
+                            <el-dropdown-item @click="goto('/list?tags=24')">招聘信息</el-dropdown-item>
                         </el-dropdown-menu>
                     </template>
                 </el-dropdown>
@@ -59,10 +59,10 @@
                     </span>
                     <template #dropdown>
                         <el-dropdown-menu>
-                            <el-dropdown-item @click="goto('/list')">课程攻略</el-dropdown-item>
-                            <el-dropdown-item @click="goto('/list')">生涯攻略</el-dropdown-item>
-                            <el-dropdown-item @click="goto('/list')">燕园生活</el-dropdown-item>
-                            <el-dropdown-item @click="goto('/list')">吐槽专区</el-dropdown-item>
+                            <el-dropdown-item @click="goto('/list?tags=31')">课程攻略</el-dropdown-item>
+                            <el-dropdown-item @click="goto('/list?tags=32')">生涯攻略</el-dropdown-item>
+                            <el-dropdown-item @click="goto('/list?tags=33')">燕园生活</el-dropdown-item>
+                            <el-dropdown-item @click="goto('/list?tags=34')">吐槽专区</el-dropdown-item>
                         </el-dropdown-menu>
                     </template>
                 </el-dropdown>
