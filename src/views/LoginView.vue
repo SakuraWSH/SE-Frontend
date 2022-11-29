@@ -165,6 +165,7 @@ export default defineComponent({
           case -1:
             this.$message.error("请填写完整信息！");
             this.signupForm.password = "";
+            this.signupForm.passwordComfirm = "";
             break;
 
           case 1:
@@ -172,6 +173,7 @@ export default defineComponent({
             this.signupForm.email = "";
             this.signupForm.password = "";
             this.signupForm.username = "";
+            this.signupForm.passwordComfirm = "";
             break;
 
           case 2:
@@ -179,6 +181,7 @@ export default defineComponent({
             this.signupForm.email = "";
             this.signupForm.password = "";
             this.signupForm.username = "";
+            this.signupForm.passwordComfirm = "";
             break;
 
           case 4:
@@ -186,6 +189,7 @@ export default defineComponent({
             this.signupForm.email = "";
             this.signupForm.password = "";
             this.signupForm.username = "";
+            this.signupForm.passwordComfirm = "";
             break;
 
           default:
