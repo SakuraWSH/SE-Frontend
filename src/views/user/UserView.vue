@@ -11,6 +11,7 @@
           <el-tab-pane label="我的信息" name="info">                                                                                                                                                                           
             <div class>
             <el-avatar :size="50" :src="circleUrl" /> 
+            //?
           </div>
           <div style="margin: 20px 0" />
           <div>
@@ -27,8 +28,8 @@
 
           </div>
           <div>
-            <el-button type="primary">保存</el-button>
-            <el-button type="primary">提交</el-button>
+            <el-button type="primary" @click="user_save">保存</el-button>
+            <el-button type="primary" @click="user_upload">提交</el-button>
           </div>
           <div>
             <el-button type="success" style="margin-left: 16px" @click="drawer = true">
@@ -109,9 +110,7 @@ import {
   Star,
 } from '@element-plus/icons-vue'
 //消息-聊天右侧聊天界面样式
-
 export default defineComponent({
-
   components:{
     ElCol,
     ElRow,
@@ -224,6 +223,19 @@ export default defineComponent({
     }
   },
   methods:{
+    //按钮实现保存功能
+    /*上传头像图片:
+      签名
+      邮箱：Email
+    */
+    user_upload(){
+      //按钮实现保存功能
+      /*上传头像图片:
+        签名
+        邮箱：Email
+      */
+      console.log("Hello")
+    },
     selectTab() {
       if(this.$route.query.tab != null){
         this.activeTab = this.$route.query.tab;
@@ -291,14 +303,12 @@ export default defineComponent({
       })
     }
   }
-
 })
 /*
 const tabPosition = ref('left')
 const textarea = ref('')
 const drawer = ref(false)
 const currentDate = ref(new Date())
-
 const state = reactive({
   circleUrl:
     'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
@@ -306,8 +316,6 @@ const state = reactive({
     'https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png',
   
 })
-
-
 const { circleUrl, squareUrl, sizeList } = toRefs(state)
 const tableData = [
   {
@@ -439,7 +447,6 @@ const friendData = [
   font-size: 32px;
   font-weight: 600;
 }
-
 .el-tabs--right .el-tabs__content,
 .el-tabs--left .el-tabs__content {
   height: 100%;
@@ -453,7 +460,6 @@ const friendData = [
 .demo-basic .block:not(:last-child) {
   border-right: 1px solid var(--el-border-color);
 }
-
 .el-input {
     width: 40%;
     margin-left: 3rem;
@@ -462,7 +468,6 @@ const friendData = [
   font-size: 12px;
   color: #999;
 }
-
 .bottom {
   margin-top: 13px;
   line-height: 12px;
@@ -470,12 +475,10 @@ const friendData = [
   justify-content: space-between;
   align-items: center;
 }
-
 .button {
   padding: 0;
   min-height: auto;
 }
-
 .image {
   width: 100%;
   display: block;
