@@ -664,13 +664,13 @@ export default defineComponent({
     
     init(){
       if(this.$route.query.key){
-        console.log(key);
+        console.log(this.$route.query.key);
         const __this = this;
         axios({
           method: "get",
           url: "/api/post/key-list",
           params: {
-            key_words : key,
+            key_words : this.$route.query.key,
             cur_page: 1,
           },
         }).then(data => {
