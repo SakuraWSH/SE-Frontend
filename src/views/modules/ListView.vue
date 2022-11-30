@@ -681,52 +681,54 @@ export default defineComponent({
           console.log(this.total)
         })
       }
-      if(this.$route.query.tags == 11){
-        this.selectthing1 = true;
+      else{
+        if(this.$route.query.tags == 11){
+          this.selectthing1 = true;
+        }
+        if(this.$route.query.tags == 12){
+          this.selectthing2 = true;
+        }
+        if(this.$route.query.tags == 13){
+          this.selectthing3 = true;
+        }
+        if(this.$route.query.tags == 21){
+          this.selectthing4 = true;
+        }
+        if(this.$route.query.tags == 22){
+          this.selectthing5 = true;
+        }
+        if(this.$route.query.tags == 23){
+          this.selectthing6 = true;
+        }
+        if(this.$route.query.tags == 24){
+          this.selectthing7 = true;
+        }
+        if(this.$route.query.tags == 31){
+          this.selectthing8 = true;
+        }
+        if(this.$route.query.tags == 32){
+          this.selectthing9 = true;
+        }
+        if(this.$route.query.tags == 33){
+          this.selectthing10 = true;
+        }
+        console.log(this.selectthing1)
+        const __this = this;
+        axios({
+          method: "get",
+          url: "/api/post/list",
+          params: {
+            tags: this.$route.query.tags,
+            cur_page: 1,
+          },
+        }).then(data => {
+          console.log(data.lst)
+          __this.postItems = data.data.lst;
+          //接收到post的总数量
+          __this.total = data.data.total_post;
+          console.log(this.total)
+        })
       }
-      if(this.$route.query.tags == 12){
-        this.selectthing2 = true;
-      }
-      if(this.$route.query.tags == 13){
-        this.selectthing3 = true;
-      }
-      if(this.$route.query.tags == 21){
-        this.selectthing4 = true;
-      }
-      if(this.$route.query.tags == 22){
-        this.selectthing5 = true;
-      }
-      if(this.$route.query.tags == 23){
-        this.selectthing6 = true;
-      }
-      if(this.$route.query.tags == 24){
-        this.selectthing7 = true;
-      }
-      if(this.$route.query.tags == 31){
-        this.selectthing8 = true;
-      }
-      if(this.$route.query.tags == 32){
-        this.selectthing9 = true;
-      }
-      if(this.$route.query.tags == 33){
-        this.selectthing10 = true;
-      }
-      console.log(this.selectthing1)
-      const __this = this;
-      axios({
-        method: "get",
-        url: "/api/post/list",
-        params: {
-          tags: this.$route.query.tags,
-          cur_page: 1,
-        },
-      }).then(data => {
-        console.log(data.lst)
-        __this.postItems = data.data.lst;
-        //接收到post的总数量
-        __this.total = data.data.total_post;
-        console.log(this.total)
-      })
     }
   }
 })
