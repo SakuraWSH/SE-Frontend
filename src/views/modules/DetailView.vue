@@ -118,6 +118,7 @@ export default defineComponent({
         })
         return;
       }
+      let __this = this;
       axios({
         method: "post",
         url: "/api/post/comment/add",
