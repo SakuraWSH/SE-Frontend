@@ -11,7 +11,7 @@
           <el-tab-pane label="我的信息" name="info">                                                                                                                                                                           
             <div class>
             <el-avatar :size="50" :src="circleUrl" /> 
-            //? 这个怎么点击改再想一下，src？
+            <!-- ? 这个怎么点击改再想一下，src？ -->
           </div>
           <div style="margin: 20px 0" />
           <div>
