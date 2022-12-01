@@ -143,6 +143,8 @@ export default defineComponent({
     signUp() {
       if (this.signupForm.password != this.signupForm.passwordComfirm) {
         this.$message.error("Please put in the same password twice!");
+        this.signupForm.password = "";
+        this.signupForm.passwordComfirm = "";
         return;
       }
 
