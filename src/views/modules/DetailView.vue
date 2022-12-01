@@ -130,6 +130,7 @@ export default defineComponent({
         if (data.data.code == 0) {
           this.$message('评论成功！')
           this.fetchComments();
+          __this.comment = '';
         } else {
           this.$message.error('评论失败qwq')
         }
