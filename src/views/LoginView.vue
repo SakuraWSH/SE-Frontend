@@ -23,19 +23,19 @@
       <img src="/src/assets/images/logo.png" alt="logo" class="login-logo" />
       <el-form :model="signupForm" class="login-form">
         <el-form-item class="login-input">
-          <!-- <el-input v-model="form.name" /> -->
           <el-input v-model="signupForm.username" size="large" placeholder="用户名/Username" />
         </el-form-item>
         <el-form-item class="login-input">
-          <!-- <el-input v-model="form.name" /> -->
           <el-input v-model="signupForm.email" size="large" placeholder="邮箱/Email" />
         </el-form-item>
+        <el-form-item class="login-input-captcha">
+          <el-input v-model="signupForm.email" size="large" class="captcha" placeholder="邮箱验证码/Email Captcha" />
+          <el-button type="info" plain class="button" size="middle" @click="getCaptcha()">获取</el-button>
+        </el-form-item>
         <el-form-item class="login-input">
-          <!-- <el-input v-model="form.desc" /> -->
           <el-input v-model="signupForm.password" size="large" placeholder="密码/Password" show-password />
         </el-form-item>
         <el-form-item class="login-input">
-          <!-- <el-input v-model="form.desc" /> -->
           <el-input v-model="signupForm.passwordComfirm" size="large" placeholder="确认密码/Comfirm Password"
             show-password />
         </el-form-item>
@@ -47,20 +47,6 @@
     </div>
   </body>
 </template>
-
-
-<!-- <script setup> -->
-// const loginForm = reactive({
-//   email: '',
-//   password: '',
-// });
-// const signupForm = reactive({
-//   username: '',
-//   email: '',
-//   password: '',
-//   passwordComfirm: '',
-// });
-<!-- </script> -->
 
 
 <script>
@@ -89,6 +75,7 @@ export default defineComponent({
       signupForm: reactive({
         username: '',
         email: '',
+        captcha: '',
         password: '',
         passwordComfirm: '',
       }),
@@ -140,6 +127,41 @@ export default defineComponent({
         }
       });
     },
+    getCaptcha() {
+      axios({
+        method: "post",
+        url: "/api/sendemail/",
+        data: {
+          email: this.signupForm.email,
+        },
+      }).then(data => {
+        switch (data.data.regist_code) {
+          case 0:
+            break;
+
+          case 1:
+            this.$message.error("该邮箱已被注册！");
+            this.signupForm.email = "";
+            this.signupForm.captcha = "";
+            this.signupForm.password = "";
+            this.signupForm.username = "";
+            this.signupForm.passwordComfirm = "";
+            break;
+
+          case 2:
+            this.$message.error("该邮箱无注册权限，请使用PKU邮箱！");
+            this.signupForm.email = "";
+            this.signupForm.captcha = "";
+            this.signupForm.password = "";
+            this.signupForm.username = "";
+            this.signupForm.passwordComfirm = "";
+            break;
+
+          default:
+            break;
+        }
+      });
+    },
     signUp() {
       if (this.signupForm.password != this.signupForm.passwordComfirm) {
         this.$message.error("Please put in the same password twice!");
@@ -155,7 +177,8 @@ export default defineComponent({
           username: this.signupForm.username,
           email: this.signupForm.email,
           password: this.signupForm.password,
-          captcha_skip: true
+          captcha_skip: false,
+          captcha: this.signupForm.captcha,
         },
       }).then(data => {
         switch (data.data.regist_code) {
@@ -171,6 +194,7 @@ export default defineComponent({
 
           case -1:
             this.$message.error("请填写完整信息！");
+            this.signupForm.captcha = "";
             this.signupForm.password = "";
             this.signupForm.passwordComfirm = "";
             break;
@@ -178,6 +202,7 @@ export default defineComponent({
           case 1:
             this.$message.error("该邮箱已被注册！");
             this.signupForm.email = "";
+            this.signupForm.captcha = "";
             this.signupForm.password = "";
             this.signupForm.username = "";
             this.signupForm.passwordComfirm = "";
@@ -186,6 +211,16 @@ export default defineComponent({
           case 2:
             this.$message.error("该邮箱无注册权限，请使用PKU邮箱！");
             this.signupForm.email = "";
+            this.signupForm.captcha = "";
+            this.signupForm.password = "";
+            this.signupForm.username = "";
+            this.signupForm.passwordComfirm = "";
+            break;
+
+          case 3:
+            this.$message.error("验证码错误！");
+            this.signupForm.email = "";
+            this.signupForm.captcha = "";
             this.signupForm.password = "";
             this.signupForm.username = "";
             this.signupForm.passwordComfirm = "";
@@ -194,6 +229,7 @@ export default defineComponent({
           case 4:
             this.$message.error("用户名已被注册！")
             this.signupForm.email = "";
+            this.signupForm.captcha = "";
             this.signupForm.password = "";
             this.signupForm.username = "";
             this.signupForm.passwordComfirm = "";
@@ -219,14 +255,10 @@ body {
 .login-block {
   margin: 0 auto;
   background-color: white;
-  /* justify-content: center; */
-  /* align-content: center; */
   text-align: center;
   border-radius: 25px;
   padding: 30px;
-  /* border: 1px solid; */
-  /* width: 30%;
-  height: 40%; */
+  height: 40%;
   box-shadow: 0px 16px 48px 16px rgba(0, 0, 0, .08),
     0px 12px 32px rgba(0, 0, 0, .12),
     0px 8px 16px -8px rgba(0, 0, 0, .16);
@@ -239,12 +271,11 @@ body {
 
 .signup {
   width: 30%;
-  height: 55%;
+  height: 65%;
 }
 
 .login-form {
   margin: 0 auto;
-  /* border: 1px solid; */
   width: 100%;
   height: 80%;
   display: flex;
@@ -253,25 +284,32 @@ body {
 }
 
 .login-logo {
-  /* height: 20%; */
   width: 50%;
-  /* width: auto; */
   margin-top: 3%;
-  /* border: 1px solid; */
 }
 
 .login-input {
   width: 80%;
   padding: 5px;
-  /* border: 1px solid; */
   margin: 0;
   margin-top: 5%;
+}
+
+.login-input-captcha {
+  width: 80%;
+  padding: 5px;
+  margin: 0;
+  margin-top: 5%;
+}
+
+.captcha {
+  width: 70%;
+  margin-right: 10px;
 }
 
 .form-item {
   margin: 0;
   margin-top: 5%;
-  /* border: 1px solid; */
   justify-content: center;
   align-content: center;
 }
