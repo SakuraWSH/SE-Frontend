@@ -29,7 +29,7 @@
           <el-input v-model="signupForm.email" size="large" placeholder="邮箱/Email" />
         </el-form-item>
         <el-form-item class="login-input-captcha">
-          <el-input v-model="signupForm.email" size="large" class="captcha" placeholder="邮箱验证码/Email Captcha" />
+          <el-input v-model="signupForm.captcha" size="large" class="captcha" placeholder="邮箱验证码/Email Captcha" />
           <el-button type="info" plain class="button" size="middle" @click="getCaptcha()">获取</el-button>
         </el-form-item>
         <el-form-item class="login-input">
