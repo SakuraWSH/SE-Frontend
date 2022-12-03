@@ -126,8 +126,6 @@ export default defineComponent({
     methods: {
         ...mapMutations(["setEmail", "setUsername", "setToken", "setProfile"]),
         goto(router) {
-            this.$router.push('/home');
-            location.reload();
             this.$router.push(router);
         },
         search() {
