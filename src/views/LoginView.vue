@@ -135,7 +135,7 @@ export default defineComponent({
           email: this.signupForm.email,
         },
       }).then(data => {
-        switch (data.data.regist_code) {
+        switch (data.data.sendemail_code) {
           case 0:
             break;
 
