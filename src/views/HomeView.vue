@@ -133,7 +133,8 @@
             </div>
           </el-col>
           <el-col span="6" class="home-col">
-            <div class="home-square" @click="goto('/list?tags=33')" @mouseenter="mouseOn = 10" @mouseleave="mouseOn = 0">
+            <div class="home-square" @click="goto('/list?tags=33')" @mouseenter="mouseOn = 10"
+              @mouseleave="mouseOn = 0">
               <el-icon v-if="mouseOn != 10">
                 <School />
               </el-icon>
@@ -144,7 +145,8 @@
             </div>
           </el-col>
           <el-col span="6" class="home-col">
-            <div class="home-square" @click="goto('/list?tags=34')" @mouseenter="mouseOn = 11" @mouseleave="mouseOn = 0">
+            <div class="home-square" @click="goto('/list?tags=34')" @mouseenter="mouseOn = 11"
+              @mouseleave="mouseOn = 0">
               <el-icon v-if="mouseOn != 11">
                 <Service />
               </el-icon>
@@ -229,7 +231,6 @@ export default defineComponent({
 .home-row-title {
   width: 10%;
   height: 100%;
-  /* border: 1px solid; */
   font-size: 2vw;
   display: flex;
   justify-content: center;
@@ -259,7 +260,6 @@ export default defineComponent({
   display: flex;
   justify-content: center;
   align-items: center;
-  /* border: 1px solid; */
 }
 
 .home-square:hover {
