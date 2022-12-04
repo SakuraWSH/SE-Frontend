@@ -80,19 +80,19 @@ export default defineComponent({
       imgList: [
         {
           name : "spring",
-          src: "../../src/assets/images/spring.png"
+          src: "https://pic.imgdb.cn/item/638c50cb16f2c2beb17597de.png"
         },
         {
           name : "summer",
-          src: "../../src/assets/images/summer.png"
+          src: "https://pic.imgdb.cn/item/638c50fb16f2c2beb175d40c.png"
         },
         {
           name : "autumn",
-          src: "../../src/assets/images/autumn.png"
+          src: "https://pic.imgdb.cn/item/638c511f16f2c2beb17608b7.png"
         },
         {
           name : "winter",
-          src: "../../src/assets/images/winter.png"
+          src: "https://pic.imgdb.cn/item/638c512f16f2c2beb1762271.png"
         }
       ],
       currentIndex: 0,
