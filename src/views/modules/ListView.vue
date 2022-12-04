@@ -600,7 +600,7 @@ export default defineComponent({
         method: "get",
         url: "/api/post/list",
         params:{
-          tags : this.postTags,
+          tags : this.postTags.pop(),
           cur_page: 1,
         },
       }).then(data => {
