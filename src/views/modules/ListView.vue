@@ -627,6 +627,7 @@ export default defineComponent({
         url: "/api/post/key-list",
         params: {
           key_words : this.input1,
+          tags: this.$route.query.tags,
           cur_page: 1,
         },
       }).then(data => {
