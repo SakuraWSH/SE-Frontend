@@ -80,19 +80,19 @@ export default defineComponent({
       imgList: [
         {
           name : "spring",
-          src: require("../../assets/images/spring.png")
+          src: "../../assets/images/spring.png"
         },
         {
           name : "summer",
-          src: require("../../assets/images/summer.png")
+          src: "../../assets/images/summer.png"
         },
         {
           name : "autumn",
-          src: require("../../assets/images/autumn.png")
+          src: "../../assets/images/autumn.png"
         },
         {
           name : "winter",
-          src: require("../../assets/images/winter.png")
+          src: "../../assets/images/winter.png"
         }
       ],
       currentIndex: 0,
