@@ -594,7 +594,7 @@ export default defineComponent({
   },
   methods: {
     search_by_label(){
-      console.log(this.postTags.pop())
+      console.log(this.postTags)
       const __this = this;
       axios({
         method: "get",
