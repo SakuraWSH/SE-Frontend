@@ -8,7 +8,7 @@
         <div class="block">
           <el-carousel>
             <el-carousel-item v-for="item in imgList" :key="item.name">
-              <img class = "picture" :src = "item.src">
+              <img class = "picture" :src = "item.src" style="height:100%;width:100%;">
             </el-carousel-item>
           </el-carousel>
         </div>
@@ -80,19 +80,19 @@ export default defineComponent({
       imgList: [
         {
           name : "spring",
-          src: "../../assets/images/spring.png"
+          src: "../../src/assets/images/spring.png"
         },
         {
           name : "summer",
-          src: "../../assets/images/summer.png"
+          src: "../../src/assets/images/summer.png"
         },
         {
           name : "autumn",
-          src: "../../assets/images/autumn.png"
+          src: "../../src/assets/images/autumn.png"
         },
         {
           name : "winter",
-          src: "../../assets/images/winter.png"
+          src: "../../src/assets/images/winter.png"
         }
       ],
       currentIndex: 0,
