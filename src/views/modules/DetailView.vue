@@ -7,8 +7,8 @@
       <div class="swiper">
         <div class="block">
           <el-carousel>
-            <el-carousel-item v-for="(index,item) in  imgList" :key="item">
-              <img class = "picture" :src = "index">
+            <el-carousel-item v-for="item in imgList" :key="item.name">
+              <img class = "picture" :src = "item.src">
             </el-carousel-item>
           </el-carousel>
         </div>
@@ -77,7 +77,24 @@ export default defineComponent({
 
   data() {
     return {
-      imgList: ["../../assets/images/spring.png","../../assets/images/summer.png","../../assets/images/autumn.png","../../assets/images/winter.png"],
+      imgList: [
+        {
+          name : "spring",
+          src: require("../../assets/images/spring.png")
+        },
+        {
+          name : "summer",
+          src: require("../../assets/images/summer.png")
+        },
+        {
+          name : "autumn",
+          src: require("../../assets/images/autumn.png")
+        },
+        {
+          name : "winter",
+          src: require("../../assets/images/winter.png")
+        }
+      ],
       currentIndex: 0,
       detailItems:[{
         headline:'',
