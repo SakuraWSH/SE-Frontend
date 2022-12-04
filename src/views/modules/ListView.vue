@@ -592,6 +592,13 @@ export default defineComponent({
   created(){
     this.init();
   },
+  watch:{
+    $route(to,from){
+      console.log(from.path);//从哪来
+      console.log(to.path);//到哪去
+      location.reload();
+    },
+  },
   methods: {
     search_by_label(){
       console.log(this.postTags.slice(-1)[0])
