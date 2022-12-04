@@ -3,7 +3,7 @@
     <el-header>
       <NavBar />
     </el-header>
-    <el-input v-model = "input1" size="large" class="w-50 m-2" placeholder="搜索" style="width:40%;left:30%;top:2%;" @keyup.enter="search()">
+    <el-input v-if = "search_select" v-model = "input1" size="large" class="w-50 m-2" placeholder="搜索" style="width:40%;left:30%;top:2%;" @keyup.enter="search()">
     </el-input>
     <el-cascader style="top:4%;width:20%;left:40%;" v-if = "selectthing1" v-model="postTags" :options="options1" :show-all-levels='true' @change="search_by_label()"/>
     <el-cascader style="top:4%;width:20%;left:40%;" v-if = "selectthing2" v-model="postTags" :options="options2" :show-all-levels='true' @change="search_by_label()"/>
@@ -569,6 +569,7 @@ export default defineComponent({
       selectthing9:false,
       selectthing10:false,
       selectthing11:false,
+      search_select:true,
       total : 0,
       page : 0,
       input1: ref(''),
@@ -671,6 +672,7 @@ export default defineComponent({
     
     init(){
       if(this.$route.query.key){
+        this.search_select = false;
         console.log(this.$route.query.key);
         const __this = this;
         axios({
