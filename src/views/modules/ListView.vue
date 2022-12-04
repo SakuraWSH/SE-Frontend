@@ -594,13 +594,13 @@ export default defineComponent({
   },
   methods: {
     search_by_label(){
-      console.log(this.postTags)
+      console.log(this.postTags[postTags.length-1])
       const __this = this;
       axios({
         method: "get",
         url: "/api/post/list",
         params:{
-          tags : this.postTags.pop(),
+          tags : this.postTags[postTags.length-1],
           cur_page: 1,
         },
       }).then(data => {
