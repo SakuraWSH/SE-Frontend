@@ -79,7 +79,7 @@
             <el-dropdown>
                 <span class="el-dropdown-link">
                     <div>{{ username }}</div>
-                    <img alt="profile" :src=profile @click="goto('/user')" />
+                    <img alt="profile" src="/src/assets/images/default_profile.png" @click="goto('/user')" />
                     <el-icon class="el-icon--right">
                         <arrow-down />
                     </el-icon>
@@ -121,7 +121,7 @@ export default defineComponent({
             }),
             username: localStorage.getItem("Username"),
             // profile: localStorage.getItem("Profile"),
-            profile: "/src/assets/images/default_profile.png",
+            // profile: "/src/assets/images/default_profile.png",
         }
     },
     methods: {
