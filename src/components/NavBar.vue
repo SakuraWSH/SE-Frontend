@@ -120,7 +120,8 @@ export default defineComponent({
                 keyword: '',
             }),
             username: localStorage.getItem("Username"),
-            profile: localStorage.getItem("Profile"),
+            // profile: localStorage.getItem("Profile"),
+            profile: "/src/assets/images/default_profile.png",
         }
     },
     methods: {
